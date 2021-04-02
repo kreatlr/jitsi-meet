@@ -223,16 +223,6 @@ class LobbyScreen extends AbstractLobbyScreen {
                         { t('lobby.knockButton') }
                     </Text>
                 </TouchableOpacity> }
-                <TouchableOpacity
-                    onPress = { this._onSwitchToPasswordMode }
-                    style = { [
-                        styles.button,
-                        styles.secondaryButton
-                    ] }>
-                    <Text>
-                        { t('lobby.enterPasswordButton') }
-                    </Text>
-                </TouchableOpacity>
             </>
         );
     }

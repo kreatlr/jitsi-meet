@@ -425,13 +425,18 @@ var config = {
     // - it's impossible to control the placement of buttons
     // - 'desktop' controls the "Share your screen" button
     // - if `toolbarButtons` is undefined, we fallback to enabling all buttons on the UI
+    toolbarButtons: [
+       'microphone', 'camera','fullscreen', 'hangup', 'chat', 'recording', 'settings', 'raisehand', 'filmstrip', 'shortcuts',
+       'tileview', 'select-background', 'download', 'mute-everyone', 'mute-video-everyone', 'security'
+    ],
+
     // toolbarButtons: [
-    //    'microphone', 'camera', 'closedcaptions', 'desktop', 'embedmeeting', 'fullscreen',
-    //    'fodeviceselection', 'hangup', 'profile', 'chat', 'recording',
-    //    'livestreaming', 'etherpad', 'sharedvideo', 'settings', 'raisehand',
-    //    'videoquality', 'filmstrip', 'invite', 'feedback', 'stats', 'shortcuts',
-    //    'tileview', 'select-background', 'download', 'help', 'mute-everyone', 'mute-video-everyone', 'security'
-    // ],
+    //     'microphone', 'camera', 'closedcaptions', 'desktop', 'embedmeeting', 'fullscreen',
+    //     'fodeviceselection', 'hangup', 'profile', 'chat', 'recording',
+    //     'livestreaming', 'etherpad', 'sharedvideo', 'settings', 'raisehand',
+    //     'videoquality', 'filmstrip', 'invite', 'feedback', 'stats', 'shortcuts',
+    //     'tileview', 'select-background', 'download', 'help', 'mute-everyone', 'mute-video-everyone', 'security'
+    //  ],
 
     // Stats
     //

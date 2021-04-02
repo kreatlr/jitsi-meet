@@ -163,12 +163,6 @@ class LobbyScreen extends AbstractLobbyScreen {
                     type = 'primary'>
                     { t('lobby.knockButton') }
                 </ActionButton> }
-                <ActionButton
-                    onClick = { this._onSwitchToPasswordMode }
-                    testId = 'lobby.enterPasswordButton'
-                    type = 'secondary'>
-                    { t('lobby.enterPasswordButton') }
-                </ActionButton>
             </>
         );
     }
