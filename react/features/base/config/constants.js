@@ -18,6 +18,6 @@ export const TOOLBAR_BUTTONS = [
     'fodeviceselection', 'hangup', 'chat', 'recording',
      'settings', 'raisehand',
      'filmstrip',
-    'tileview', 'mute-everyone', 'mute-video-everyone',
+    'tileview',
     'security', 'toggle-camera'
 ];

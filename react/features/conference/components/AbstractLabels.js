@@ -125,6 +125,6 @@ export default class AbstractLabels<P: Props, S> extends Component<P, S> {
 export function _abstractMapStateToProps(state: Object) {
     return {
         _filmstripVisible: isFilmstripVisible(state),
-        _showVideoQualityLabel: !shouldDisplayTileView(state)
+        _showVideoQualityLabel: false
     };
 }
