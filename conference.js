@@ -87,7 +87,8 @@ import {
     participantPresenceChanged,
     participantRoleChanged,
     participantUpdated,
-    updateRemoteParticipantFeatures
+    updateRemoteParticipantFeatures,
+    kickParticipant
 } from './react/features/base/participants';
 import {
     getUserSelectedCameraDeviceId,
@@ -2135,6 +2136,7 @@ export default {
             (...args) => APP.store.dispatch(lockStateChanged(room, ...args)));
 
         room.on(JitsiConferenceEvents.KICKED, participant => {
+            APP.store.dispatch(maybeRedirectToWelcomePage());
             APP.store.dispatch(kickedOut(room, participant));
         });
 
@@ -2785,6 +2787,20 @@ export default {
      * requested
      */
     hangup(requestFeedback = false) {
+        const localParticipant = getLocalParticipant(APP.store.getState());
+        
+        if(localParticipant.role == "moderator")
+        {
+            const memberList = room.getParticipants().map(p => p.getId());
+            for(const pid of memberList)
+            {
+                if(pid != localParticipant.id)
+                {
+                    APP.store.dispatch(kickParticipant(pid));
+                }
+            }
+        }
+        
         APP.store.dispatch(disableReceiver());
 
         this._stopProxyConnection();
