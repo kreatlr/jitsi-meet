@@ -65,7 +65,7 @@ class Subject extends Component<Props> {
 
         return (
             <div className = { className }>
-                { _showSubject && <span className = 'subject-text'>{ _subject }</span>}
+                { _showSubject && <span className = 'subject-text'>{ 'Kreatlr Drawing Classes' }</span>}
                 { _showParticipantCount && <ParticipantsCount /> }
                 { !_hideConferenceTimer && <ConferenceTimer /> }
             </div>
