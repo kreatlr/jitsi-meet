@@ -272,4 +272,4 @@ function _mapStateToProps(state) {
     };
 }
 
-export default translate(connect(_mapStateToProps)(DeepLinkingMobilePage));
+// export default translate(connect(_mapStateToProps)(DeepLinkingMobilePage));
