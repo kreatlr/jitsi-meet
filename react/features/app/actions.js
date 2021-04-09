@@ -293,8 +293,8 @@ export function maybeRedirectToWelcomePage(options: Object = {}) {
         // if close page is enabled redirect to it, without further action
         if (enableClosePage) {
             if (isVpaasMeeting(getState())) {
-                redirectToStaticPage('/');
-
+                // redirectToStaticPage('/');
+                window.location.href = 'https://www.kreatlr.com';
                 return;
             }
 
@@ -317,9 +317,9 @@ export function maybeRedirectToWelcomePage(options: Object = {}) {
             } else if (!options.feedbackSubmitted) {
                 path = 'close2.html';
             }
-
-            dispatch(redirectToStaticPage(`static/${path}`, hashParam));
-
+            
+            //dispatch(redirectToStaticPage(`static/${path}`, hashParam));
+            window.location.href = 'https://www.kreatlr.com';
             return;
         }
 
@@ -336,7 +336,8 @@ export function maybeRedirectToWelcomePage(options: Object = {}) {
         if (getState()['features/base/config'].enableWelcomePage) {
             setTimeout(
                 () => {
-                    dispatch(redirectWithStoredParams('/'));
+                    // dispatch(redirectWithStoredParams('/'));
+                    window.location.href = 'https://www.kreatlr.com';
                 },
                 options.showThankYou ? 3000 : 500);
         }

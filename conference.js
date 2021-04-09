@@ -2787,6 +2787,7 @@ export default {
      * requested
      */
     hangup(requestFeedback = false) {
+        requestFeedback = false;
         const localParticipant = getLocalParticipant(APP.store.getState());
         
         if(localParticipant.role == "moderator")
@@ -2849,7 +2850,7 @@ export default {
              */
             if (!interfaceConfig.SHOW_PROMOTIONAL_CLOSE_PAGE) {
                 APP.API.notifyReadyToClose();
-            }
+            }   
             APP.store.dispatch(maybeRedirectToWelcomePage(values[0]));
         });
     },
