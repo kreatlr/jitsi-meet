@@ -1081,7 +1081,9 @@ class Toolbox extends Component<Props> {
 
         const overflowMenuAdditionalButtons = [];
         const mainMenuAdditionalButtons = [];
-
+        mainMenuAdditionalButtons.push(<ToggleCameraButton
+            key = 'toggle-camera'
+            showLabel = { false } />);
         if (this._showDesktopSharingButton()) {
             buttons.has('desktop')
                 ? mainMenuAdditionalButtons.push(<ToolbarButton
