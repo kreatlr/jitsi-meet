@@ -11,7 +11,7 @@ import { translate } from '../../base/i18n';
 import { IconTileView } from '../../base/icons';
 import { connect } from '../../base/redux';
 import { AbstractButton, type AbstractButtonProps } from '../../base/toolbox/components';
-import { setTileView } from '../actions';
+import { setTileView, setOverflowMenuVisible } from '../actions';
 import { shouldDisplayTileView } from '../functions';
 import logger from '../logger';
 
@@ -61,6 +61,7 @@ class TileViewButton<P: Props> extends AbstractButton<P, *> {
         const value = !_tileViewEnabled;
 
         logger.debug(`Tile view ${value ? 'enable' : 'disable'}`);
+        dispatch(setOverflowMenuVisible(false));
         dispatch(setTileView(value));
     }
 

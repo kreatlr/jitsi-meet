@@ -4,7 +4,8 @@ import type { Dispatch } from 'redux';
 
 import {
     SCREEN_SHARE_REMOTE_PARTICIPANTS_UPDATED,
-    SET_TILE_VIEW
+    SET_TILE_VIEW,
+    SET_OVERFLOW_MENU_VISIBLE
 } from './actionTypes';
 import { shouldDisplayTileView } from './functions';
 
@@ -40,6 +41,13 @@ export function setTileView(enabled: ?boolean) {
     return {
         type: SET_TILE_VIEW,
         enabled
+    };
+}
+
+export function setOverflowMenuVisible(visible: boolean): Object {
+    return {
+        type: SET_OVERFLOW_MENU_VISIBLE,
+        visible
     };
 }
 
