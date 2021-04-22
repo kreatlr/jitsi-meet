@@ -12,7 +12,8 @@ import {
     getLocalParticipant,
     getParticipantById,
     getParticipantCount,
-    pinParticipant
+    pinParticipant,
+    isLocalParticipantModerator
 } from '../../../base/participants';
 import { connect } from '../../../base/redux';
 import { isTestModeEnabled } from '../../../base/testing';
@@ -517,7 +518,10 @@ class Thumbnail extends Component<Props, State> {
         const { _participant, dispatch } = this.props;
         const { id, pinned } = _participant;
 
-        dispatch(pinParticipant(pinned ? null : id));
+	// eslint-disable-next-line no-undef
+        if (isLocalParticipantModerator(APP.store.getState())) {
+            dispatch(pinParticipant(pinned ? null : id));
+        }
     }
 
     _onMouseEnter: () => void;
