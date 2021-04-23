@@ -131,6 +131,7 @@ import { setSharedVideoStatus } from './react/features/shared-video/actions';
 import { AudioMixerEffect } from './react/features/stream-effects/audio-mixer/AudioMixerEffect';
 import { createPresenterEffect } from './react/features/stream-effects/presenter';
 import { endpointMessageReceived } from './react/features/subtitles';
+import {toggleLobbyMode} from './react/features/lobby/actions'
 import UIEvents from './service/UI/UIEvents';
 
 const logger = Logger.getLogger(__filename);
@@ -1995,6 +1996,11 @@ export default {
 
                 APP.store.dispatch(localParticipantRoleChanged(role));
                 APP.API.notifyUserRoleChanged(id, role);
+                if (role == 'moderator') {
+
+                    APP.store.dispatch(toggleLobbyMode(true));
+    
+                }
             } else {
                 APP.store.dispatch(participantRoleChanged(id, role));
             }
