@@ -12,7 +12,8 @@ import {
     ParticipantView,
     getParticipantCount,
     isEveryoneModerator,
-    pinParticipant
+    pinParticipant,
+    isLocalParticipantModerator
 } from '../../../base/participants';
 import { Container } from '../../../base/react';
 import { connect } from '../../../base/redux';
@@ -221,10 +222,10 @@ function _mapDispatchToProps(dispatch: Function, ownProps): Object {
 
             if (tileView) {
                 dispatch(toggleToolboxVisible());
-            } else {
+	    } else if (isLocalParticipantModerator(APP.store.getState())) {
                 dispatch(pinParticipant(participant.pinned ? null : participant.id));
             }
-        },
+	},
 
         /**
          * Handles long press on the thumbnail.

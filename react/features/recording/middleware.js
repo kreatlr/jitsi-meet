@@ -87,13 +87,13 @@ MiddlewareRegistry.register(({ dispatch, getState }) => next => action => {
             LIVE_STREAMING_ON_SOUND_ID,
             LIVE_STREAMING_ON_SOUND_FILE));
 
-        dispatch(registerSound(
-            RECORDING_OFF_SOUND_ID,
-            RECORDING_OFF_SOUND_FILE));
+       // dispatch(registerSound(
+       //     RECORDING_OFF_SOUND_ID,
+       //     RECORDING_OFF_SOUND_FILE));
 
-        dispatch(registerSound(
-            RECORDING_ON_SOUND_ID,
-            RECORDING_ON_SOUND_FILE));
+       // dispatch(registerSound(
+       //     RECORDING_ON_SOUND_ID,
+       //     RECORDING_ON_SOUND_FILE));
 
         break;
 
