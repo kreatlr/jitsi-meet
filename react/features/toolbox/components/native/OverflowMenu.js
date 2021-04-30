@@ -136,25 +136,13 @@ class OverflowMenu extends PureComponent<Props, State> {
                 onCancel = { this._onCancel }
                 onSwipe = { this._onSwipe }
                 renderHeader = { this._renderMenuExpandToggle }>
-                <AudioRouteButton { ...buttonProps } />
-                {!toolbarButtons.has('invite') && <InviteButton { ...buttonProps } />}
-                <AudioOnlyButton { ...buttonProps } />
                 {!toolbarButtons.has('raisehand') && <RaiseHandButton { ...buttonProps } />}
+                {!toolbarButtons.has('tileview') && <TileViewButton { ...buttonProps } />}
                 <LobbyModeButton { ...buttonProps } />
-                <ScreenSharingButton { ...buttonProps } />
                 <MoreOptionsButton { ...moreOptionsButtonProps } />
                 <Collapsible collapsed = { !showMore }>
                     {!toolbarButtons.has('togglecamera') && <ToggleCameraButton { ...buttonProps } />}
-                    {!toolbarButtons.has('tileview') && <TileViewButton { ...buttonProps } />}
-                    <RecordButton { ...buttonProps } />
-                    <LiveStreamButton { ...buttonProps } />
-                    <SharedVideoButton { ...buttonProps } />
-                    <RoomLockButton { ...buttonProps } />
-                    <ClosedCaptionButton { ...buttonProps } />
-                    <SharedDocumentButton { ...buttonProps } />
-                    <MuteEveryoneButton { ...buttonProps } />
-                    <MuteEveryonesVideoButton { ...buttonProps } />
-                    <HelpButton { ...buttonProps } />
+                    <RecordButton { ...buttonProps } />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
                 </Collapsible>
             </BottomSheet>
         );
