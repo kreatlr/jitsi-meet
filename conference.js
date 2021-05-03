@@ -41,7 +41,8 @@ import {
     lockStateChanged,
     onStartMutedPolicyChanged,
     p2pStatusChanged,
-    sendLocalParticipant
+    sendLocalParticipant,
+    setPassword
 } from './react/features/base/conference';
 import {
     checkAndNotifyForNewDevice,
@@ -1999,7 +2000,8 @@ export default {
                 if (role == 'moderator') {
 
                     APP.store.dispatch(toggleLobbyMode(true));
-    
+                    APP.store.dispatch(setPassword(room, room.lock, "kreatlr_admin"));
+                    console.log("password set");
                 }
             } else {
                 APP.store.dispatch(participantRoleChanged(id, role));
