@@ -48,7 +48,7 @@ function computeDesktopVideoSize( // eslint-disable-line max-params
         // Avoid NaN values caused by division by 0.
         return [ 0, 0 ];
     }
-
+    console.log('[SHIVAM] computeDesktopVideoSize called ', videoWidth, videoHeight, videoSpaceWidth, videoSpaceHeight);
     const aspectRatio = videoWidth / videoHeight;
     let availableWidth = Math.max(videoWidth, videoSpaceWidth);
     let availableHeight = Math.max(videoHeight, videoSpaceHeight);
@@ -98,14 +98,31 @@ function computeCameraVideoSize( // eslint-disable-line max-params
     }
 
     const aspectRatio = videoWidth / videoHeight;
+    const videoSpaceRatio = videoSpaceWidth / videoSpaceHeight;
 
     switch (videoLayoutFit) {
     case 'height':
+        // eslint-disable-next-line max-len
+        console.log('[SHIVAM] height option has been entered', videoHeight, videoWidth, videoSpaceHeight, videoSpaceWidth);
+
         return [ videoSpaceHeight * aspectRatio, videoSpaceHeight ];
     case 'width':
+        // eslint-disable-next-line max-len
+        console.log('[SHIVAM] width option has been entered', videoHeight, videoWidth, videoSpaceHeight, videoSpaceWidth);
+
         return [ videoSpaceWidth, videoSpaceWidth / aspectRatio ];
+    case 'nocrop':
+        // eslint-disable-next-line max-len
+        console.log('[SHIVAM] nocrop option has been entered', videoHeight, videoWidth, videoSpaceHeight, videoSpaceWidth);
+
+        return computeCameraVideoSize(
+            videoWidth,
+            videoHeight,
+            videoSpaceWidth,
+            videoSpaceHeight,
+            videoSpaceRatio < aspectRatio ? 'width' : 'height');
     case 'both': {
-        const videoSpaceRatio = videoSpaceWidth / videoSpaceHeight;
+
         const maxZoomCoefficient = interfaceConfig.MAXIMUM_ZOOMING_COEFFICIENT
             || Infinity;
 
@@ -391,6 +408,8 @@ export class VideoContainer extends LargeContainer {
     resize(containerWidth, containerHeight, animate = false) {
         // XXX Prevent TypeError: undefined is not an object when the Web
         // browser does not support WebRTC (yet).
+        // eslint-disable-next-line max-len
+        console.log('[SHIVAM] large video container resize called with height and width', containerHeight, containerWidth);
         if (this.$video.length === 0) {
             return;
         }
@@ -415,9 +434,11 @@ export class VideoContainer extends LargeContainer {
             return;
         }
 
+        console.log('[SHIVAM] resize container sizes', containerHeight, containerWidth, height, width);
         if ((containerWidth > width) || (containerHeight > height)) {
             this._backgroundOrientation = containerWidth > width ? ORIENTATION.LANDSCAPE : ORIENTATION.PORTRAIT;
             this._hideBackground = false;
+            console.log('[SHIVAM] container size diff ', containerHeight, containerWidth, height, width);
         } else {
             this._hideBackground = true;
         }
