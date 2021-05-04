@@ -12,8 +12,7 @@ import {
     ParticipantView,
     getParticipantCount,
     isEveryoneModerator,
-    pinParticipant,
-    isLocalParticipantModerator
+    pinParticipant, isLocalParticipantModerator
 } from '../../../base/participants';
 import { Container } from '../../../base/react';
 import { connect } from '../../../base/redux';
@@ -202,6 +201,26 @@ function Thumbnail(props: Props) {
 /**
  * Maps part of redux actions to component's props.
  *
+ * @param {Object} participant - Participant on which click has been performed.
+ * @returns {{
+ *     dispatch: Function,
+ *     getState: Function
+ * }}
+ */
+function restrictedPinParticipant(participant) {
+    return (dispatch, getState) => {
+        const state = getState();
+
+        console.log('[SHIVAM] isLocalParticipantModerator is ', isLocalParticipantModerator(state));
+        if (isLocalParticipantModerator(state)) {
+            dispatch(pinParticipant(participant.pinned ? null : participant.id));
+        }
+    };
+}
+
+/**
+ * Maps part of redux actions to component's props.
+ *
  * @param {Function} dispatch - Redux's {@code dispatch} function.
  * @param {Props} ownProps - The own props of the component.
  * @returns {{
@@ -210,6 +229,7 @@ function Thumbnail(props: Props) {
  * }}
  */
 function _mapDispatchToProps(dispatch: Function, ownProps): Object {
+
     return {
         /**
          * Handles click/tap event on the thumbnail.
@@ -218,14 +238,12 @@ function _mapDispatchToProps(dispatch: Function, ownProps): Object {
          * @returns {void}
          */
         _onClick() {
-            const { participant, tileView } = ownProps;
+            const { participant } = ownProps;
 
-            if (tileView) {
-                dispatch(toggleToolboxVisible());
-	    } else if (isLocalParticipantModerator(APP.store.getState())) {
-                dispatch(pinParticipant(participant.pinned ? null : participant.id));
-            }
-	},
+            dispatch(restrictedPinParticipant(participant));
+
+            // }
+        },
 
         /**
          * Handles long press on the thumbnail.

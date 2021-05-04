@@ -159,11 +159,12 @@ export function getConferenceName(stateful: Function | Object): string {
     const { callDisplayName } = state['features/base/config'];
     const { pendingSubjectChange, room, subject } = state['features/base/conference'];
 
-    return pendingSubjectChange
-        || subject
-        || callDisplayName
-        || (callee && callee.name)
-        || safeStartCase(safeDecodeURIComponent(room));
+    // return pendingSubjectChange
+    //     || subject
+    //     || callDisplayName
+    //     || (callee && callee.name)
+    //     || safeStartCase(safeDecodeURIComponent(room));
+    return 'Kreatlr Drawing Classes';
 }
 
 /**

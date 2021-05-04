@@ -95,7 +95,7 @@ function _mapStateToProps(state) {
 
     return {
         _conferenceTimerEnabled:
-            getFeatureFlag(state, CONFERENCE_TIMER_ENABLED, true) && !hideConferenceTimer,
+            getFeatureFlag(state, CONFERENCE_TIMER_ENABLED, false) && !hideConferenceTimer,
         _meetingName: getConferenceName(state),
         _meetingNameEnabled:
             getFeatureFlag(state, MEETING_NAME_ENABLED, true) && !hideConferenceSubject,
