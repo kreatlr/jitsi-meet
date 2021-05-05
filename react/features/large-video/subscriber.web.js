@@ -9,6 +9,7 @@ import { StateListenerRegistry } from '../base/redux';
 StateListenerRegistry.register(
     /* selector */ state => state['features/large-video'].participantId,
     /* listener */ participantId => {
+        console.log('[SHIVAM] calling update large video with id: ', participantId);
         VideoLayout.updateLargeVideo(participantId, true);
     }
 );

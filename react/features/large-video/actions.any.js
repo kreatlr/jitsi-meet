@@ -2,7 +2,7 @@
 
 import type { Dispatch } from 'redux';
 
-import VideoLayout from '../../../modules/UI/videolayout/VideoLayout';
+// import VideoLayout from '../../../modules/UI/videolayout/VideoLayout';
 import {
     createSelectParticipantFailedEvent,
     sendAnalytics
@@ -18,7 +18,7 @@ import {
     UPDATE_KNOWN_LARGE_VIDEO_RESOLUTION
 } from './actionTypes';
 
-declare var APP: Object;
+// declare var APP: Object;
 
 /**
  * Signals conference to select a participant.
@@ -88,29 +88,30 @@ export function selectParticipantInLargeVideo(participant: ?string) {
     };
 }
 
-/**
- * Resizes the large video container based on the dimensions provided.
- *
- * @param {number} width - Width that needs to be applied on the large video container.
- * @param {number} height - Height that needs to be applied on the large video container.
- * @returns {Function}
- */
-export function resizeLargeVideo(width: number, height: number) {
-    return (dispatch: Dispatch<any>, getState: Function) => {
-        const state = getState();
-        const largeVideo = state['features/large-video'];
-
-        console.log('[SHIVAM] resize large video called, height and width are ', height, width);
-        if (largeVideo) {
-            console.log('[SHIVAM] Large video is valid');
-            const largeVideoContainer = VideoLayout.getLargeVideo();
-
-            largeVideoContainer.updateContainerSize(width, height);
-            largeVideoContainer.resize();
-            console.log('[SHIVAM] completed large video resize');
-        }
-    };
-}
+//
+// /**
+//  * Resizes the large video container based on the dimensions provided.
+//  *
+//  * @param {number} width - Width that needs to be applied on the large video container.
+//  * @param {number} height - Height that needs to be applied on the large video container.
+//  * @returns {Function}
+//  */
+// export function resizeLargeVideo(width: number, height: number) {
+//     return (dispatch: Dispatch<any>, getState: Function) => {
+//         const state = getState();
+//         const largeVideo = state['features/large-video'];
+//
+//         console.log('[SHIVAM] resize large video called, height and width are ', height, width);
+//         if (largeVideo) {
+//             console.log('[SHIVAM] Large video is valid');
+//             const largeVideoContainer = VideoLayout.getLargeVideo();
+//
+//             largeVideoContainer.updateContainerSize(width, height);
+//             largeVideoContainer.resize();
+//             console.log('[SHIVAM] completed large video resize');
+//         }
+//     };
+// }
 
 
 /**

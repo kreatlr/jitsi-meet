@@ -285,7 +285,10 @@ UI.setVideoMuted = function(id) {
     }
 };
 
-UI.updateLargeVideo = (id, forceUpdate) => VideoLayout.updateLargeVideo(id, forceUpdate);
+UI.updateLargeVideo = (id, forceUpdate) => {
+    console.log('[SHIVAM] calling update large video from UI : ', id, forceUpdate);
+    VideoLayout.updateLargeVideo(id, forceUpdate);
+};
 
 /**
  * Adds a listener that would be notified on the given type of event.

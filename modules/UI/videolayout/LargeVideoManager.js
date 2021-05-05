@@ -358,6 +358,8 @@ export default class LargeVideoManager {
      * Update container size.
      */
     updateContainerSize(width, height) {
+        console.log('[SHIVAM] called update container size');
+
         if (typeof width === 'number') {
             this.preferredWidth = width;
         }

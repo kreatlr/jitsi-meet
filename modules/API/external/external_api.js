@@ -1006,6 +1006,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      * @returns {void}
      */
     resizeLargeVideo(width, height) {
+        console.log('[SHIVAM] called resizelarge video from external apis');
         if (width <= this._width && height <= this._height) {
             this.executeCommand('resizeLargeVideo', width, height);
         }

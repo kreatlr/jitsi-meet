@@ -438,7 +438,8 @@ export class VideoContainer extends LargeContainer {
         if ((containerWidth > width) || (containerHeight > height)) {
             this._backgroundOrientation = containerWidth > width ? ORIENTATION.LANDSCAPE : ORIENTATION.PORTRAIT;
             this._hideBackground = false;
-            console.log('[SHIVAM] container size diff ', containerHeight, containerWidth, height, width);
+            // eslint-disable-next-line max-len
+            console.log('[SHIVAM] container size diff ', containerHeight, containerWidth, height, width, this._backgroundOrientation);
         } else {
             this._hideBackground = true;
         }

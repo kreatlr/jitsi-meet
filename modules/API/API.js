@@ -136,6 +136,7 @@ function initCommands() {
         },
         'resize-large-video': (width, height) => {
             logger.debug('Resize large video command received');
+            console.log('[SHIVAM] Resize large video command received');
             sendAnalytics(createApiEvent('largevideo.resized'));
             APP.store.dispatch(resizeLargeVideo(width, height));
         },

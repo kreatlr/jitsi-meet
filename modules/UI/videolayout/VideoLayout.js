@@ -171,6 +171,7 @@ const VideoLayout = {
     },
 
     updateLargeVideo(id, forceUpdate) {
+        console.log('[SHIVAM] updating large video: ', id, forceUpdate);
         if (!largeVideo) {
             return;
         }
@@ -266,6 +267,8 @@ const VideoLayout = {
      * Currently used by tests (torture).
      */
     getLargeVideo() {
+        console.log('[SHIVAM] called get large video');
+
         return largeVideo;
     },
 
