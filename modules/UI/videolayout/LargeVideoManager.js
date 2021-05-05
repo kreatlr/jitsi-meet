@@ -390,6 +390,7 @@ export default class LargeVideoManager {
     resizeContainer(type, animate = false) {
         const container = this.getContainer(type);
 
+        console.log('[SHIVAM] called resize container', type, animate);
         container.resize(this.width, this.height, animate);
     }
 
@@ -400,7 +401,10 @@ export default class LargeVideoManager {
     resize(animate) {
         // resize all containers
         Object.keys(this.containers)
-            .forEach(type => this.resizeContainer(type, animate));
+            .forEach(type => {
+                console.log('[SHIVAM] calling multiple resizes', type, animate);
+                this.resizeContainer(type, animate);
+            });
     }
 
     /**
@@ -649,7 +653,10 @@ export default class LargeVideoManager {
      * @returns {void}
      */
     _onVideoResolutionUpdate() {
+
         const { height, width } = this.videoContainer.getStreamSize();
+
+        console.log('[SHIVAM] called _onVideoResolutionUpdate', height, width);
         const { resolution } = APP.store.getState()['features/large-video'];
 
         if (height !== resolution) {
@@ -658,8 +665,11 @@ export default class LargeVideoManager {
 
         const currentAspectRatio = height === 0 ? 0 : width / height;
 
+        console.log('[SHIVAM] this video aspect ratio is ', this._videoAspectRatio);
+        console.log('[SHIVAM] current aspect ratio is ', currentAspectRatio);
         if (this._videoAspectRatio !== currentAspectRatio) {
             this._videoAspectRatio = currentAspectRatio;
+            console.log('[SHIVAM] this video aspect is not same as current aspect ratio, calling resize()');
             this.resize();
         }
     }

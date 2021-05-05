@@ -1,8 +1,8 @@
 // @flow
 
-// import type { Dispatch } from 'redux';
+import type { Dispatch } from 'redux';
 
-// import VideoLayout from '../../../modules/UI/videolayout/VideoLayout';
+import VideoLayout from '../../../modules/UI/videolayout/VideoLayout';
 
 import { UPDATE_LAST_LARGE_VIDEO_MEDIA_EVENT } from './actionTypes';
 
@@ -20,22 +20,29 @@ export * from './actions.any';
 export function resizeLargeVideo(width: number, height: number) {
     return (dispatch: Dispatch<any>, getState: Function) => {
         // eslint-disable-next-line no-unused-vars
-        const state = getState();
 
-        console.log('[SHIVAM] called resizeLargeVideo ', height, width);
+        try {
+            const state = getState();
 
-        // const largeVideo = state['features/large-video'];
-        //
-        // console.log('[SHIVAM] called resizeLargeVideo ', height, width);
-        //
-        // if (largeVideo) {
-        //     const largeVideoContainer = VideoLayout.getLargeVideo();
-        //
-        //     console.log('[SHIVAM] large video is present, calling resize ', height, width);
-        //
-        //     largeVideoContainer.updateContainerSize(width, height);
-        //     largeVideoContainer.resize();
-        // }
+            console.log('[SHIVAM] called resizeLargeVideo ', height, width);
+            const largeVideo = state['features/large-video'];
+
+            console.log('[SHIVAM] called resizeLargeVideo ', height, width);
+
+            if (largeVideo) {
+                const largeVideoContainer = VideoLayout.getLargeVideo();
+
+                console.log('[SHIVAM] large video is present, calling resize ', height, width);
+
+                largeVideoContainer.updateContainerSize(width, height);
+                largeVideoContainer.resize();
+            }
+        } catch (e) {
+            console.log('[SHIVAM] Error while resizeLargeVideo', e.stack);
+            console.log('[SHIVAM] Error while resizeLargeVideo', e.name);
+            console.log('[SHIVAM] Error while resizeLargeVideo', e.message);
+        }
+
     };
 }
 
