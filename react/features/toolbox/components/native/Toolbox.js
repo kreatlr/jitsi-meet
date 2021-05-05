@@ -91,7 +91,6 @@ function Toolbox(props: Props) {
                           styles = { buttonStylesBorderless }
                           toggledStyles = { backgroundToggledStyle } />}
                 {additionalButtons.has('tileview') && <TileViewButton styles = { buttonStylesBorderless } />}
-                {additionalButtons.has('invite') && <InviteButton styles = { buttonStylesBorderless } />}
                 {additionalButtons.has('togglecamera')
                       && <ToggleCameraButton
                           styles = { buttonStylesBorderless }
