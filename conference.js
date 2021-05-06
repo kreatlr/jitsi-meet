@@ -1998,9 +1998,8 @@ export default {
                 APP.store.dispatch(localParticipantRoleChanged(role));
                 APP.API.notifyUserRoleChanged(id, role);
                 if (role == 'moderator') {
-
-                    APP.store.dispatch(toggleLobbyMode(true));
                     APP.store.dispatch(setPassword(room, room.lock, "kreatlr_admin"));
+                    APP.store.dispatch(toggleLobbyMode(true));
                     console.log("password set");
                 }
             } else {
