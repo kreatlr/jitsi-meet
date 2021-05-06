@@ -938,7 +938,7 @@
     "lobby": {
         "knockingParticipantList": "Students in Waiting room",
         "allow": "Allow",
-        "backToKnockModeButton": "No password, ask to join instead",
+        "backToKnockModeButton": "Not a tutor? Ask to join instead",
         "dialogTitle": "Lobby mode",
         "disableDialogContent": "Lobby mode is currently enabled. This feature ensures that unwanted participants can't join your meeting. Do you want to disable it?",
         "disableDialogSubmit": "Disable",
@@ -946,8 +946,8 @@
         "enableDialogPasswordField": "Set password (optional)",
         "enableDialogSubmit": "Enable",
         "enableDialogText": "Lobby mode lets you protect your meeting by only allowing people to enter after a formal approval by a moderator.",
-        "enterPasswordButton": "Enter meeting password",
-        "enterPasswordTitle": "Enter password to join meeting",
+        "enterPasswordButton": "Are you tutor?",
+        "enterPasswordTitle": "Enter tutor password to join class",
         "invalidPassword": "Invalid password",
         "joiningMessage": "Your tutor is setting up the class. Please wait.",
         "joinWithPasswordMessage": "Trying to join with password, please wait...",
@@ -963,7 +963,7 @@
         "notificationLobbyDisabled": "Lobby has been disabled by {{originParticipantName}}",
         "notificationLobbyEnabled": "Lobby has been enabled by {{originParticipantName}}",
         "notificationTitle": "Lobby",
-        "passwordField": "Enter meeting password",
+        "passwordField": "Enter tutor password",
         "passwordJoinButton": "Join",
         "reject": "Reject",
         "toggleLabel": "Enable lobby"
