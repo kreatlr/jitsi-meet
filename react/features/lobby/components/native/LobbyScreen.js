@@ -99,13 +99,6 @@ class LobbyScreen extends AbstractLobbyScreen {
                     onChangeText = { this._onChangeDisplayName }
                     style = { styles.field }
                     value = { displayName } />
-                <Text style = { styles.fieldLabel }>
-                    { t('lobby.emailField') }
-                </Text>
-                <TextInput
-                    onChangeText = { this._onChangeEmail }
-                    style = { styles.field }
-                    value = { email } />
             </View>
         );
     }

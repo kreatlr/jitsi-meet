@@ -139,11 +139,8 @@ class OverflowMenu extends PureComponent<Props, State> {
                 {!toolbarButtons.has('raisehand') && <RaiseHandButton { ...buttonProps } />}
                 {!toolbarButtons.has('tileview') && <TileViewButton { ...buttonProps } />}
                 <LobbyModeButton { ...buttonProps } />
-                <MoreOptionsButton { ...moreOptionsButtonProps } />
-                <Collapsible collapsed = { !showMore }>
-                    {!toolbarButtons.has('togglecamera') && <ToggleCameraButton { ...buttonProps } />}
-                    <RecordButton { ...buttonProps } />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-                </Collapsible>
+                {!toolbarButtons.has('togglecamera') && <ToggleCameraButton { ...buttonProps } />}
+                <RecordButton { ...buttonProps } />
             </BottomSheet>
         );
     }

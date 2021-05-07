@@ -81,7 +81,7 @@
         "dontShowAgain": "Don’t show me this again"
     },
     "connectingOverlay": {
-        "joiningRoom": "Connecting you to your meeting..."
+        "joiningRoom": "Connecting you to your class..."
     },
     "connection": {
         "ATTACHED": "Attached",
@@ -957,7 +957,7 @@
         "joiningWithPasswordTitle": "Joining with password...",
         "knockButton": "Ask to Join",
         "knockTitle": "Someone wants to join the meeting",
-        "nameField": "Enter your name",
+        "nameField": "Please enter kid's name here",
         "notificationLobbyAccessDenied": "{{targetParticipantName}} has been rejected to join by {{originParticipantName}}",
         "notificationLobbyAccessGranted": "{{targetParticipantName}} has been allowed to join by {{originParticipantName}}",
         "notificationLobbyDisabled": "Lobby has been disabled by {{originParticipantName}}",
