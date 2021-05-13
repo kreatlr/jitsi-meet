@@ -4,7 +4,7 @@ import { ReducerRegistry, set } from '../base/redux';
 
 import {
     CLEAR_TOOLBOX_TIMEOUT,
-    FULL_SCREEN_CHANGED,
+    FULL_SCREEN_CHANGED, HANGUP_POPUP_ENABLED,
     SET_OVERFLOW_DRAWER,
     SET_OVERFLOW_MENU_VISIBLE,
     SET_TOOLBAR_HOVERED,
@@ -30,7 +30,8 @@ declare var interfaceConfig: Object;
  *     overflowMenuVisible: boolean,
  *     timeoutID: number,
  *     timeoutMS: number,
- *     visible: boolean
+ *     visible: boolean,
+ *     hangupPopupEnabled: boolean,
  * }}
  */
 function _getInitialState() {
@@ -116,7 +117,12 @@ function _getInitialState() {
          *
          * @type {boolean}
          */
-        visible
+        visible,
+
+        /**
+         * Indicates whether the hang up pop us is activated or not
+         */
+        hangupPopupEnabled: false
     };
 }
 
@@ -185,6 +191,11 @@ ReducerRegistry.register(
 
         case TOGGLE_TOOLBOX_VISIBLE:
             return set(state, 'visible', state.alwaysVisible || !state.visible);
+        case HANGUP_POPUP_ENABLED:
+            return {
+                ...state,
+                hangupPopupEnabled: action.hangupPopupEnabled
+            };
         }
 
         return state;

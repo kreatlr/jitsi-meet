@@ -44,8 +44,10 @@ export function connect() {
  * request for call feedback.
  * @returns {Function}
  */
-export function disconnect(requestFeedback: boolean = false) {
+export function disconnect(requestFeedback: boolean = false, endForAll: boolean = true) {
     // XXX For web based version we use conference hanging up logic from the old
     // app.
-    return () => APP.conference.hangup(requestFeedback);
+    console.log('[SHIVAM] disconnect function is being called ');
+
+    return () => APP.conference.hangup(requestFeedback, endForAll);
 }

@@ -13,6 +13,7 @@ import { isToolboxVisible, getMovableButtons } from '../../functions.native';
 import AudioMuteButton from '../AudioMuteButton';
 import HangupButton from '../HangupButton';
 import VideoMuteButton from '../VideoMuteButton';
+import PopUp from '../native/PopUp';
 
 import OverflowMenuButton from './OverflowMenuButton';
 import RaiseHandButton from './RaiseHandButton';
@@ -42,7 +43,9 @@ type Props = {
     /**
      * The redux {@code dispatch} function.
      */
-    dispatch: Function
+    dispatch: Function,
+
+    _hangupPopupEnabled: boolean
 };
 
 /**
@@ -66,6 +69,8 @@ function Toolbox(props: Props) {
             _styles.backgroundToggle
         ]
     };
+
+    console.log('[SHIVAM] [NATIVE] props._hangupPopupEnabled is', props._hangupPopupEnabled);
 
     return (
         <View
@@ -100,10 +105,23 @@ function Toolbox(props: Props) {
                     toggledStyles = { toggledButtonStyles } />
                 <HangupButton
                     styles = { hangupButtonStyles } />
+                { props._hangupPopupEnabled === true ? <PopUp /> : null }
             </SafeAreaView>
         </View>
     );
 }
+
+// /**
+//  * Renders popup element.
+//  *
+//  * @returns {JSX.Element|null}
+//  * @private
+//  */
+// function _renderHangupPopup() {
+//     console.log('[SHIVAM] _renderHangupPopup is called', this.props._hangupPopupEnabled);
+//
+//     return this.props._hangupPopupEnabled ? <PopUp /> : null;
+// }
 
 /**
  * Maps parts of the redux state to {@link Toolbox} (React {@code Component})
@@ -115,10 +133,13 @@ function Toolbox(props: Props) {
  * @returns {Props}
  */
 function _mapStateToProps(state: Object): Object {
+    console.log('[SHIVAM] [NATIVE] hangup popup enabled is', state['features/toolbox'].hangupPopupEnabled);
+
     return {
         _styles: ColorSchemeRegistry.get(state, 'Toolbox'),
         _visible: isToolboxVisible(state),
-        _width: state['features/base/responsive-ui'].clientWidth
+        _width: state['features/base/responsive-ui'].clientWidth,
+        _hangupPopupEnabled: state['features/toolbox'].hangupPopupEnabled
     };
 }
 

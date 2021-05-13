@@ -9,6 +9,8 @@ import { translate } from '../../base/i18n';
 import { connect } from '../../base/redux';
 import { AbstractHangupButton } from '../../base/toolbox/components';
 import type { AbstractButtonProps } from '../../base/toolbox/components';
+import { enableHangUpPopup } from '../actions';
+
 
 /**
  * The type of the React {@code Component} props of {@link HangupButton}.
@@ -18,7 +20,9 @@ type Props = AbstractButtonProps & {
     /**
      * The redux {@code dispatch} function.
      */
-    dispatch: Function
+    dispatch: Function,
+
+    setIsOpen: boolean
 };
 
 /**
@@ -42,16 +46,26 @@ class HangupButton extends AbstractHangupButton<Props, *> {
     constructor(props: Props) {
         super(props);
 
-        this._hangup = _.once(() => {
+        // const [ isOpen, setIsOpen ] = APP.store.getState;
+
+        // const togglePopup = () => {
+        //     console.log('[SHIVAM] toggle popUp called');
+        //     setIsOpen(!isOpen);
+        //     console.log('[SHIVAM] isOpen is ', isOpen);
+        // };
+
+        this._hangup = () => {
             sendAnalytics(createToolbarEvent('hangup'));
 
-            // FIXME: these should be unified.
-            if (navigator.product === 'ReactNative') {
-                this.props.dispatch(appNavigate(undefined));
-            } else {
-                this.props.dispatch(disconnect(true));
-            }
-        });
+            this.props.dispatch(enableHangUpPopup(true));
+
+            // // FIXME: these should be unified.
+            // if (navigator.product === 'ReactNative') {
+            //     this.props.dispatch(appNavigate(undefined));
+            // } else {
+            //     this.props.dispatch(disconnect(false));
+            // }
+        };
     }
 
     /**

@@ -1,7 +1,7 @@
 /* @flow */
 
 import {
-    CLEAR_TOOLBOX_TIMEOUT,
+    CLEAR_TOOLBOX_TIMEOUT, HANGUP_POPUP_ENABLED,
     SET_OVERFLOW_MENU_VISIBLE,
     SET_TOOLBAR_HOVERED,
     SET_TOOLBOX_ALWAYS_VISIBLE,
@@ -12,6 +12,8 @@ import {
     TOGGLE_TOOLBOX_VISIBLE
 } from './actionTypes';
 
+
+export * from './actions.any';
 
 /**
  * Signals that toolbox timeout should be cleared.
@@ -156,5 +158,18 @@ export function setToolboxVisible(visible: boolean): Object {
 export function toggleToolboxVisible() {
     return {
         type: TOGGLE_TOOLBOX_VISIBLE
+    };
+}
+
+/**
+ * Enables/Disables the hanup popup.
+ *
+ * @param {boolean} hangupPopupEnabled - Whether to enable hangup popup or not.
+ * @returns {{hangupPopupEnabled: boolean, type: string}}
+ */
+export function enableHangUpPopup(hangupPopupEnabled: boolean) {
+    return {
+        type: HANGUP_POPUP_ENABLED,
+        hangupPopupEnabled
     };
 }
