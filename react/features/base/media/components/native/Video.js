@@ -86,9 +86,7 @@ export default class Video extends Component<Props> {
             // RTCView
             const style = styles.video;
             const objectFit
-                = zoomEnabled
-                    ? 'contain'
-                    : (style && style.objectFit) || 'cover';
+                = 'contain';
             const rtcView
                 = (
                     <RTCView
