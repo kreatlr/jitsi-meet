@@ -21,6 +21,7 @@ import {
     PrivateMessageMenuButton,
     RemoteControlButton,
     VideoMenu,
+    SpotlightButton,
     VolumeSlider
 } from './';
 
@@ -166,6 +167,11 @@ class RemoteVideoMenuTriggerButton extends Component<Props> {
                 buttons.push(
                     <MuteEveryoneElsesVideoButton
                         key = 'mute-others-video'
+                        participantID = { participantID } />
+                );
+                buttons.push(
+                    <SpotlightButton
+                        key = 'spotlight'
                         participantID = { participantID } />
                 );
             }

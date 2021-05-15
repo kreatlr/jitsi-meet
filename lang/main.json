@@ -211,6 +211,8 @@
         "gracefulShutdown": "Our service is currently down for maintenance. Please try again later.",
         "grantModeratorDialog": "Are you sure you want to make this participant a moderator?",
         "grantModeratorTitle": "Grant moderator",
+        "spotlight": "Are you sure you want to spotlight this participant?",
+        "spotlightTitle": "Spotlight",
         "IamHost": "I am the tutor",
         "incorrectRoomLockPassword": "Incorrect password",
         "incorrectPassword": "Incorrect username or password",
@@ -890,7 +892,8 @@
         "videoMuted": "Camera disabled",
         "remoteControl": "Start / Stop remote control",
         "show": "Show on stage",
-        "videomute": "Participant has stopped the camera"
+        "videomute": "Participant has stopped the camera",
+        "spotlight": "Spotlight for everyone"
     },
     "welcomepage": {
         "accessibilityLabel": {
