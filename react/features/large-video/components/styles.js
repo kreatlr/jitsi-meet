@@ -19,7 +19,9 @@ ColorSchemeRegistry.register('LargeVideo', {
         ...StyleSheet.absoluteFillObject,
         alignItems: 'stretch',
         backgroundColor: schemeColor('background'),
-        flex: 1,
+        resizeMode: 'contain',
+        width: '100%',
+        height: '100%',
         justifyContent: 'center'
     }
 });

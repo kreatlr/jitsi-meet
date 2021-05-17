@@ -107,6 +107,7 @@ export default class AbstractContainer<P: Props> extends Component<P> {
         // $FlowFixMe
         return React.createElement(type, {
             style: _style,
+            resizeMode: 'contain',
             ...filteredProps
         }, children);
     }

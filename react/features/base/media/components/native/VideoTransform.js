@@ -32,7 +32,7 @@ const MIN_SCALE = 1;
  * ViewPort (hint) support is added to the LargeVideo component then this
  * constant will not be necessary anymore.
  */
-const MAX_OFFSET = 100;
+const MAX_OFFSET = 0;
 
 /**
  * The max allowed scale (magnification) multiplier.

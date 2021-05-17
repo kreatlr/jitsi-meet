@@ -108,13 +108,6 @@ export default class AbstractVideoTrack<P: Props> extends Component<P> {
         const zoomEnabled
             = this.props.zoomEnabled;
 
-        // && stream
-        // && videoTrack;
-
-        // && videoTrack.videoType === 'desktop';
-
-        console.log('[SHIVAM] zoomenabled is ', zoomEnabled);
-
         return (
             <Video
                 mirror = { videoTrack && videoTrack.mirror }

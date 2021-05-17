@@ -157,7 +157,8 @@ function Thumbnail(props: Props) {
                 style = { _styles.participantViewStyle }
                 tintEnabled = { participantInLargeVideo && !disableTint }
                 tintStyle = { _styles.activeThumbnailTint }
-                zOrder = { 1 } />
+                zOrder = { 1 }
+                zoomEnabled = { false }/>
 
             { renderDisplayName && <Container style = { styles.displayNameContainer }>
                 <DisplayNameLabel participantId = { participantId } />
