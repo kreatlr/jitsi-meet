@@ -4,40 +4,53 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 
+import CustomDialog from '../../../base/dialog/components/native/CustomDialog';
 import {
-    isLocalParticipantModerator, pinParticipant
+    isLocalParticipantModerator
 } from '../../../base/participants';
-import { enableHangUpPopup } from '../../actions';
+
 
 import EndMeetingForAllButton from './EndMeetingForAllButton';
 import LeaveMeetingButton from './LeaveMeetingButton';
-
-
-// import { AbstractButton } from '../../../base/toolbox/components';
 
 type Props = {
     _isLocalParticipantModerator: boolean
 }
 
+
+const styles = {
+    hangupDialogContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        lineHeight: 24,
+        fontsize: 16,
+        width: '80%',
+        flex: 0,
+        flexDirection: 'column',
+        cursor: 'pointer',
+        backgroundColor: '#273546',
+        marginBottom: 10
+    }
+};
+
 /**
  *
  */
-class PopUp extends Component<Props> {
-
-    // handleClick = () => {
-    //     console.log('[SHIVAM] close button called');
-    //     this.props.dispatch(enableHangUpPopup(true));
-    // };
+class HangUpDialog extends Component<Props> {
 
     // eslint-disable-next-line require-jsdoc
     render() {
         console.log('[SHIVAM] popup has been called');
+        console.log('[SHIVAM] styles.hangupDialogContainer is ', styles.hangupDialogContainer);
 
         return (
-            <View>
-                {this._renderEndMeetingForAll()}
-                <LeaveMeetingButton />
-            </View>
+            <CustomDialog
+                style = { styles.hangupDialogContainer } >
+                <View>
+                    {this._renderEndMeetingForAll()}
+                    <LeaveMeetingButton />
+                </View>
+            </CustomDialog>
         );
     }
 
@@ -59,31 +72,12 @@ class PopUp extends Component<Props> {
         }
 
         return this.props._isLocalParticipantModerator === true ? <EndMeetingForAllButton /> : null;
-
-        // return (dispatch, getState) => {
-        //     const state = getState();
-        //
-        //     console.log('[SHIVAM] isLocalParticipantModerator is ', isLocalParticipantModerator(state));
-        //     if (isLocalParticipantModerator(state)) {
-        //         dispatch(pinParticipant(participant.pinned ? null : participant.id));
-        //     }
-        // };
     }
 }
 
-// function handleClick() {
-//     return (dispatch, getState) => {
-//         console.log('[SHIVAM] close button called');
-//         dispatch(enableHangUpPopup(false));
-//     };
-// }
-
-const _mapDispatchToProps = dispatch => {
+const _mapDispatchToProps = () => {
     return {
-        handleCloseClick: () => {
-            console.log('[SHIVAM] close button called');
-            dispatch(enableHangUpPopup(false));
-        }
+
     };
 };
 
@@ -93,4 +87,4 @@ const _mapStateToProps = state => {
     };
 };
 
-export default connect(_mapStateToProps, _mapDispatchToProps)(PopUp);
+export default connect(_mapStateToProps, _mapDispatchToProps)(HangUpDialog);

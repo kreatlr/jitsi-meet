@@ -106,10 +106,14 @@ export default class AbstractVideoTrack<P: Props> extends Component<P> {
         // Actual zoom is currently only enabled if the stream is a desktop
         // stream.
         const zoomEnabled
-            = this.props.zoomEnabled
-                && stream
-                && videoTrack
-                && videoTrack.videoType === 'desktop';
+            = this.props.zoomEnabled;
+
+        // && stream
+        // && videoTrack;
+
+        // && videoTrack.videoType === 'desktop';
+
+        console.log('[SHIVAM] zoomenabled is ', zoomEnabled);
 
         return (
             <Video

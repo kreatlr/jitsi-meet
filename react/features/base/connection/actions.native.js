@@ -7,6 +7,11 @@ import { conferenceLeft, conferenceWillLeave } from '../conference/actions';
 import { getCurrentConference } from '../conference/functions';
 import JitsiMeetJS, { JitsiConnectionEvents } from '../lib-jitsi-meet';
 import {
+    getLocalParticipant,
+    getParticipants,
+    kickParticipant
+} from '../participants';
+import {
     getBackendSafeRoomName,
     parseURIString
 } from '../util';
@@ -330,6 +335,7 @@ export function disconnect() {
             // (and the respective Redux action) which is fired after the
             // conference has been left, notify the application about the
             // intention to leave the conference.
+
             dispatch(conferenceWillLeave(conference_));
 
             promise

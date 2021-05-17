@@ -77,16 +77,16 @@ import {
 } from '../../actions';
 import { getToolbarAdditionalButtons, isToolboxVisible } from '../../functions';
 import DownloadButton from '../DownloadButton';
-import HangupButton from '../HangupButton';
 import HelpButton from '../HelpButton';
 import MuteEveryoneButton from '../MuteEveryoneButton';
 import MuteEveryonesVideoButton from '../MuteEveryonesVideoButton';
 
 
 import AudioSettingsButton from './AudioSettingsButton';
+import PopUp from './HangUpDialog';
+import HangupButton from './HangupButton';
 import OverflowMenuButton from './OverflowMenuButton';
 import OverflowMenuProfileItem from './OverflowMenuProfileItem';
-import PopUp from './PopUp';
 import ToggleCameraButton from './ToggleCameraButton';
 import ToolbarButton from './ToolbarButton';
 import VideoSettingsButton from './VideoSettingsButton';
@@ -212,9 +212,7 @@ type Props = {
     /**
      * Invoked to obtain translated strings.
      */
-    t: Function,
-
-    _hangupPopupEnabled: boolean
+    t: Function
 };
 
 declare var APP: Object;
@@ -1185,18 +1183,6 @@ class Toolbox extends Component<Props> {
     }
 
     /**
-     * Renders popup element.
-     *
-     * @returns {JSX.Element|null}
-     * @private
-     */
-    _renderHangupPopup() {
-        console.log('[SHIVAM] _renderHangupPopup is called', this.props._hangupPopupEnabled);
-
-        return this.props._hangupPopupEnabled ? <PopUp /> : null;
-    }
-
-    /**
      * Renders the Audio controlling button.
      *
      * @returns {ReactElement}
@@ -1268,7 +1254,6 @@ class Toolbox extends Component<Props> {
                             customClass = 'hangup-button'
                             visible = { this._shouldShowButton('hangup') } />
                     </div>
-                    {this._renderHangupPopup() }
                 </div>
             </div>
         );
@@ -1324,8 +1309,6 @@ function _mapStateToProps(state) {
         desktopSharingDisabledTooltipKey = 'dialog.shareYourScreenDisabled';
     }
 
-    console.log('[SHIVAM] hangup popup enabled is', state['features/toolbox'].hangupPopupEnabled);
-
     return {
         _chatOpen: state['features/chat'].isOpen,
         _clientWidth: clientWidth,
@@ -1346,8 +1329,7 @@ function _mapStateToProps(state) {
         _raisedHand: localParticipant.raisedHand,
         _screensharing: localVideo && localVideo.videoType === 'desktop',
         _visible: isToolboxVisible(state),
-        _visibleButtons: getToolbarButtons(state),
-        _hangupPopupEnabled: state['features/toolbox'].hangupPopupEnabled
+        _visibleButtons: getToolbarButtons(state)
     };
 }
 

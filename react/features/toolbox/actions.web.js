@@ -3,7 +3,7 @@
 import type { Dispatch } from 'redux';
 
 import {
-    FULL_SCREEN_CHANGED, HANGUP_POPUP_ENABLED,
+    FULL_SCREEN_CHANGED,
     SET_FULL_SCREEN,
     SET_OVERFLOW_DRAWER
 } from './actionTypes';

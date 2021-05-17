@@ -15,6 +15,11 @@ import {
 import { connect, disconnect, setLocationURL } from '../base/connection';
 import { loadConfig } from '../base/lib-jitsi-meet';
 import { MEDIA_TYPE } from '../base/media';
+import {
+    getLocalParticipant,
+    getParticipants, isLocalParticipantModerator,
+    kickParticipant
+} from '../base/participants';
 import { toState } from '../base/redux';
 import { createDesiredLocalTracks, isLocalCameraTrackMuted, isLocalTrackMuted } from '../base/tracks';
 import {
@@ -47,9 +52,34 @@ declare var interfaceConfig: Object;
  * scheme, or a mere room name.
  * @returns {Function}
  */
-export function appNavigate(uri: ?string) {
+export function appNavigate(uri: ?string, endForAll: boolean = true) {
     return async (dispatch: Dispatch<any>, getState: Function) => {
         let location = parseURIString(uri);
+
+        const state = getState();
+        const localParticipant = getLocalParticipant(state);
+
+        console.log('[SHIVAM] local participant id is', localParticipant.id);
+        console.log('[SHIVAM] local participant role is', localParticipant.role);
+
+        if (isLocalParticipantModerator(state) && endForAll) {
+            console.log('[SHIVAM] local participant role is moderator');
+            try {
+                const memberList = getParticipants(state).map(p => p.id);
+
+                console.log('[SHIVAM] kicking out members ', memberList);
+                for (const pid of memberList) {
+                    if (pid !== localParticipant.id) {
+                        dispatch(kickParticipant(pid));
+                        console.log('[SHIVAM] member is kicked out ', pid);
+                    }
+                }
+            } catch (e) {
+                console.error(e);
+                console.error(e.message);
+            }
+
+        }
 
         // If the specified location (URI) does not identify a host, use the app's
         // default.
@@ -295,6 +325,7 @@ export function maybeRedirectToWelcomePage(options: Object = {}) {
             if (isVpaasMeeting(getState())) {
                 // redirectToStaticPage('/');
                 window.location.href = 'https://www.kreatlr.com';
+
                 return;
             }
 
@@ -317,9 +348,10 @@ export function maybeRedirectToWelcomePage(options: Object = {}) {
             } else if (!options.feedbackSubmitted) {
                 path = 'close2.html';
             }
-            
-            //dispatch(redirectToStaticPage(`static/${path}`, hashParam));
+
+            // dispatch(redirectToStaticPage(`static/${path}`, hashParam));
             window.location.href = 'https://www.kreatlr.com';
+
             return;
         }
 

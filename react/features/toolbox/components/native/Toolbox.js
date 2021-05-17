@@ -7,13 +7,11 @@ import { ColorSchemeRegistry } from '../../../base/color-scheme';
 import { connect } from '../../../base/redux';
 import { StyleType } from '../../../base/styles';
 import { ChatButton } from '../../../chat';
-import { InviteButton } from '../../../invite';
 import { TileViewButton } from '../../../video-layout';
-import { isToolboxVisible, getMovableButtons } from '../../functions.native';
+import { isToolboxVisible, getMovableButtons } from '../../functions';
 import AudioMuteButton from '../AudioMuteButton';
-import HangupButton from '../HangupButton';
 import VideoMuteButton from '../VideoMuteButton';
-import PopUp from '../native/PopUp';
+import HangupButton from '../native/HangupButton';
 
 import OverflowMenuButton from './OverflowMenuButton';
 import RaiseHandButton from './RaiseHandButton';
@@ -105,23 +103,10 @@ function Toolbox(props: Props) {
                     toggledStyles = { toggledButtonStyles } />
                 <HangupButton
                     styles = { hangupButtonStyles } />
-                { props._hangupPopupEnabled === true ? <PopUp /> : null }
             </SafeAreaView>
         </View>
     );
 }
-
-// /**
-//  * Renders popup element.
-//  *
-//  * @returns {JSX.Element|null}
-//  * @private
-//  */
-// function _renderHangupPopup() {
-//     console.log('[SHIVAM] _renderHangupPopup is called', this.props._hangupPopupEnabled);
-//
-//     return this.props._hangupPopupEnabled ? <PopUp /> : null;
-// }
 
 /**
  * Maps parts of the redux state to {@link Toolbox} (React {@code Component})

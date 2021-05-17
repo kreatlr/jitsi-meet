@@ -58,10 +58,14 @@ export function openDialog(component: Object, componentProps: ?Object, rawDialog
  * @returns {Function}
  */
 export function toggleDialog(component: Object, componentProps: ?Object) {
+    console.log('[SHIVAM] toggle pop up is being called');
+
     return (dispatch: Dispatch<any>, getState: Function) => {
         if (isDialogOpen(getState, component)) {
+            console.log('[SHIVAM] dialog close is being called');
             dispatch(hideDialog(component));
         } else {
+            console.log('[SHIVAM] dialog open is being called');
             dispatch(openDialog(component, componentProps));
         }
     };

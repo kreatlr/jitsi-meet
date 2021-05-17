@@ -4,7 +4,7 @@ import { ReducerRegistry, set } from '../base/redux';
 
 import {
     CLEAR_TOOLBOX_TIMEOUT,
-    FULL_SCREEN_CHANGED, HANGUP_POPUP_ENABLED,
+    FULL_SCREEN_CHANGED,
     SET_OVERFLOW_DRAWER,
     SET_OVERFLOW_MENU_VISIBLE,
     SET_TOOLBAR_HOVERED,
@@ -191,11 +191,6 @@ ReducerRegistry.register(
 
         case TOGGLE_TOOLBOX_VISIBLE:
             return set(state, 'visible', state.alwaysVisible || !state.visible);
-        case HANGUP_POPUP_ENABLED:
-            return {
-                ...state,
-                hangupPopupEnabled: action.hangupPopupEnabled
-            };
         }
 
         return state;

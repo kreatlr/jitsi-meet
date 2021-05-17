@@ -2,7 +2,7 @@
 
 // import _ from 'lodash';
 import React, { Component } from 'react';
-import { Text, TouchableHighlight, Button, View } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 
@@ -14,6 +14,34 @@ import { disconnect } from '../../../base/connection';
  * An abstract implementation of a button for disconnecting a conference.
  */
 
+const styles = {
+    hangupDialogLeaveClass: {
+        marginTop: 8,
+        marginBottom: 20,
+        backgroundColor: '#62666b',
+        borderWidth: 1,
+        borderRadius: 8,
+        flex: 0,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '90%',
+        textAlign: 'center'
+    },
+    text1: {
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 20,
+        paddingRight: 20,
+        fontSize: 16,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'white',
+        width: '100%',
+        textAlign: 'center'
+    }
+};
+
 // eslint-disable-next-line require-jsdoc
 class LeaveMeetingButton extends Component {
 
@@ -23,64 +51,17 @@ class LeaveMeetingButton extends Component {
      * @returns {JSX.Element}
      */
     render() {
-        return (
-            <View>
-                <Button
-                    onPress = { this.props.onLeaveMeeting }
-                    title = 'Leave Class'
-                    color = '#841584'
-                    accessibilityLabel = 'Learn more about leave class' />
+        console.log('[SHIVAM] styles.hangupDialogLeaveClass is ', styles.hangupDialogLeaveClass);
 
-                {/* <TouchableHighlight*/}
-                {/*    accessibilityLabel = 'Leave Class?'*/}
-                {/*    accessibilityRole = 'button'*/}
-                {/*    onPress = { this.props.onLeaveMeeting } >*/}
-                {/*    <View>*/}
-                {/*        <Text> Leave Class? </Text>*/}
-                {/*    </View>*/}
-                {/* </TouchableHighlight>*/}
-            </View>
+        return (
+            <TouchableOpacity
+                onPress = { this.props.onLeaveMeeting }
+                style = { styles.hangupDialogLeaveClass }>
+                <Text style = { styles.text1 } >Leave Class</Text>
+            </TouchableOpacity>
         );
     }
 }
-
-/**
- * Askdjba.
- *
- * @returns {(function(*): void)|*}
- */
-// function onClick() {
-//     console.log('[SHIVAM] onlicki has been called during hangup');
-//
-//     return (dispatch, getState) => {
-//         // sendAnalytics(createToolbarEvent('hangup'));
-//
-//         // FIXME: these should be unified.
-//         if (navigator.product === 'ReactNative') {
-//             console.log('[SHIVAM] product is native');
-//             dispatch(appNavigate(undefined));
-//         } else {
-//             console.log('[SHIVAM] product is web based');
-//             dispatch(disconnect(false));
-//         }
-//     };
-// }
-
-// const _mapDispatchToProps(dispatch: Function, ownProps): Object {
-//
-//     return {
-//         onEndMeetingForAll: () {
-//             console.log('[SHIVAM] onlicki has been called during hangup');
-//             if (navigator.product === 'ReactNative') {
-//                 console.log('[SHIVAM] product is native');
-//                 dispatch(appNavigate(undefined));
-//             } else {
-//                 console.log('[SHIVAM] product is web based');
-//                 dispatch(disconnect(false));
-//             }
-//         }
-//     };
-// }
 
 const _mapDispatchToProps = dispatch => {
     return {
@@ -88,7 +69,7 @@ const _mapDispatchToProps = dispatch => {
             sendAnalytics(createToolbarEvent('hangup'));
             if (navigator.product === 'ReactNative') {
                 console.log('[SHIVAM] product is native');
-                dispatch(appNavigate(undefined));
+                dispatch(appNavigate(undefined, false));
             } else {
                 console.log('[SHIVAM] product is web based');
                 dispatch(disconnect(false, false));

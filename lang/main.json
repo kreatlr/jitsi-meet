@@ -782,6 +782,7 @@
         "exitTileView": "Exit tile view",
         "feedback": "Leave feedback",
         "hangup": "Leave",
+        "hangupDialog": "Want to leave the class?",
         "help": "Help",
         "invite": "Invite people",
         "lobbyButtonDisable": "Disable lobby mode",

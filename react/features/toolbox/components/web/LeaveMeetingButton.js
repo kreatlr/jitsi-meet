@@ -24,49 +24,13 @@ class LeaveMeetingButton extends Component {
     render() {
         return (
             <div>
-                <button onClick = { this.props.onLeaveMeeting }> Leave Class? </button>
+                <button
+                    className = 'hangup-dialog leave-class'
+                    onClick = { this.props.onLeaveMeeting }> Leave Class </button>
             </div>
         );
     }
 }
-
-/**
- * Askdjba.
- *
- * @returns {(function(*): void)|*}
- */
-// function onClick() {
-//     console.log('[SHIVAM] onlicki has been called during hangup');
-//
-//     return (dispatch, getState) => {
-//         // sendAnalytics(createToolbarEvent('hangup'));
-//
-//         // FIXME: these should be unified.
-//         if (navigator.product === 'ReactNative') {
-//             console.log('[SHIVAM] product is native');
-//             dispatch(appNavigate(undefined));
-//         } else {
-//             console.log('[SHIVAM] product is web based');
-//             dispatch(disconnect(false));
-//         }
-//     };
-// }
-
-// const _mapDispatchToProps(dispatch: Function, ownProps): Object {
-//
-//     return {
-//         onEndMeetingForAll: () {
-//             console.log('[SHIVAM] onlicki has been called during hangup');
-//             if (navigator.product === 'ReactNative') {
-//                 console.log('[SHIVAM] product is native');
-//                 dispatch(appNavigate(undefined));
-//             } else {
-//                 console.log('[SHIVAM] product is web based');
-//                 dispatch(disconnect(false));
-//             }
-//         }
-//     };
-// }
 
 const _mapDispatchToProps = dispatch => {
     return {
