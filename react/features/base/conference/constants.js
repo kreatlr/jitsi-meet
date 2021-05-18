@@ -27,3 +27,10 @@ export const EMAIL_COMMAND = 'email';
  * from the outside is not cool but it should suffice for now.
  */
 export const JITSI_CONFERENCE_URL_KEY = Symbol('url');
+
+/**
+ * The password used by tutors to get entry without lobby
+ *
+ * @type {string}
+ */
+export const TUTOR_PASSWORD = 'kreatlr_admin';

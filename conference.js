@@ -25,6 +25,7 @@ import {
 import {
     AVATAR_URL_COMMAND,
     EMAIL_COMMAND,
+    TUTOR_PASSWORD,
     authStatusChanged,
     commonUserJoinedHandling,
     commonUserLeftHandling,
@@ -1997,8 +1998,8 @@ export default {
 
                 APP.store.dispatch(localParticipantRoleChanged(role));
                 APP.API.notifyUserRoleChanged(id, role);
-                if (role == 'moderator') {
-                    APP.store.dispatch(setPassword(room, room.lock, 'kreatlr_admin'));
+                if (role === 'moderator') {
+                    APP.store.dispatch(setPassword(room, room.lock, TUTOR_PASSWORD));
                     APP.store.dispatch(toggleLobbyMode(true));
                     console.log('password set');
                 }
