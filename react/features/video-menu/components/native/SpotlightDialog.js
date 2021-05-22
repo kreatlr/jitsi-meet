@@ -2,14 +2,14 @@
 
 import React from 'react';
 
-import { Dialog } from '../../../base/dialog';
+import { ConfirmDialog } from '../../../base/dialog';
 import { translate } from '../../../base/i18n';
 import { connect } from '../../../base/redux';
 import AbstractSpotlightDialog
     from '../AbstractSpotlightDialog';
 
 /**
- * Dialog to confirm a grant moderator action.
+ * Dialog to confirm a remote participant kick action.
  */
 class SpotlightDialog extends AbstractSpotlightDialog {
     /**
@@ -20,15 +20,9 @@ class SpotlightDialog extends AbstractSpotlightDialog {
      */
     render() {
         return (
-            <Dialog
-                okKey = 'dialog.Yes'
-                onSubmit = { this._onSubmit }
-                titleKey = 'dialog.spotlightTitle'
-                width = 'small'>
-                <div>
-                    { this.props.t('dialog.spotlight') }
-                </div>
-            </Dialog>
+            <ConfirmDialog
+                contentKey = 'dialog.spotlight'
+                onSubmit = { this._onSubmit } />
         );
     }
 

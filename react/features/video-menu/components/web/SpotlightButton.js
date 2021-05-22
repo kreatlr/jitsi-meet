@@ -5,10 +5,10 @@ import React from 'react';
 import { translate } from '../../../base/i18n';
 import { IconCrown } from '../../../base/icons';
 import { connect } from '../../../base/redux';
-import AbstractGrantModeratorButton, {
+import AbstractSpotlightButton, {
     _mapStateToProps,
     type Props
-} from '../AbstractGrantModeratorButton';
+} from '../AbstractSpotlightButton';
 
 import VideoMenuButton from './VideoMenuButton';
 
@@ -46,9 +46,9 @@ class SpotlightButton extends AbstractSpotlightButton {
         return (
             <VideoMenuButton
                 buttonText = { t('videothumbnail.spotlight') }
-                displayClass = 'grantmoderatorlink'
+                displayClass = 'spotlightlink'
                 icon = { IconCrown }
-                id = { `grantmoderatorlink_${participantID}` }
+                id = { `spotlightlink_${participantID}` }
                 // eslint-disable-next-line react/jsx-handler-names
                 onClick = { this._handleClick } />
         );
@@ -57,4 +57,4 @@ class SpotlightButton extends AbstractSpotlightButton {
     _handleClick: () => void
 }
 
-export default translate(connect(_mapStateToProps)(GrantModeratorButton));
+export default translate(connect(_mapStateToProps)(SpotlightButton));

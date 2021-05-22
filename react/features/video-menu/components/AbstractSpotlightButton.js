@@ -10,7 +10,7 @@ import {
 } from '../../base/participants';
 import { AbstractButton, type AbstractButtonProps } from '../../base/toolbox/components';
 
-import { GrantModeratorDialog } from '.';
+import { SpotlightDialog } from '.';
 
 export type Props = AbstractButtonProps & {
 
@@ -36,7 +36,7 @@ export type Props = AbstractButtonProps & {
 export default class AbstractSpotlightButton extends AbstractButton<Props, *> {
   accessibilityLabel = 'toolbar.accessibilityLabel.grantModerator';
   icon = IconCrown;
-  label = 'videothumbnail.grantModerator';
+  label = 'videothumbnail.spotlight';
 
   /**
    * Handles clicking / pressing the button, and kicks the participant.
@@ -47,7 +47,7 @@ export default class AbstractSpotlightButton extends AbstractButton<Props, *> {
   _handleClick() {
       const { dispatch, participantID } = this.props;
 
-      dispatch(openDialog(GrantModeratorDialog, { participantID }));
+      dispatch(openDialog(SpotlightDialog, { participantID }));
   }
 }
 
@@ -69,6 +69,5 @@ export function _mapStateToProps(state: Object, ownProps: Props) {
 
     return {
         visible: Boolean(localParticipant?.role === PARTICIPANT_ROLE.MODERATOR)
-          && !isParticipantModerator(targetParticipant)
     };
 }

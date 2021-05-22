@@ -45,6 +45,7 @@ import {
     P2P_STATUS_CHANGED,
     SEND_TONES,
     SET_FOLLOW_ME,
+    SET_SPOTLIGHT,
     SET_PASSWORD,
     SET_PASSWORD_FAILED,
     SET_ROOM,
@@ -610,6 +611,13 @@ export function setFollowMe(enabled: boolean) {
     return {
         type: SET_FOLLOW_ME,
         enabled
+    };
+}
+
+export function setSpotlight(id: string) {
+    return {
+        type: SET_SPOTLIGHT,
+        id
     };
 }
 

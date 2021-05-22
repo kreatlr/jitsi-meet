@@ -8,7 +8,7 @@ import {
 import { StateListenerRegistry } from '../base/redux';
 import { shouldDisplayTileView } from '../video-layout/functions';
 
-import { FOLLOW_ME_COMMAND } from './constants';
+import { FOLLOW_ME_COMMAND, SPOTLIGHT_COMMAND } from './constants';
 
 /**
  * Subscribes to changes to the Follow Me setting for the local participant to
@@ -19,7 +19,11 @@ import { FOLLOW_ME_COMMAND } from './constants';
 StateListenerRegistry.register(
     /* selector */ state => state['features/base/conference'].followMeEnabled,
     /* listener */ (newSelectedValue, store) => _sendFollowMeCommand(newSelectedValue || 'off', store));
+    
 
+    StateListenerRegistry.register(
+        /* selector */ state => state['features/base/conference'].spotlightEnabled,
+        /* listener */ (newSelectedValue, store) => _sendSpotlightCommand(newSelectedValue, store));
 /**
  * Subscribes to changes to the currently pinned participant in the user
  * interface of the local participant.
@@ -77,6 +81,16 @@ function _getFollowMeState(state) {
     };
 }
 
+function _getSpotlightState(id) {
+    // const pinnedParticipant = getPinnedParticipant(state);
+
+    return {
+        nextOnStage: id
+    };
+}
+
+
+
 /**
  * Sends the follow-me command, when a local property change occurs.
  *
@@ -118,3 +132,40 @@ function _sendFollowMeCommand(
         { attributes: _getFollowMeState(state) }
     );
 }
+
+function _sendSpotlightCommand(
+    newSelectedValue, store) { // eslint-disable-line no-unused-vars
+        let { id } = newSelectedValue;
+console.log("Send Spotlight Command " + id);
+const state = store.getState();
+const conference = getCurrentConference(state);
+
+if (!conference) {
+    return;
+}
+
+// Only a moderator is allowed to send commands.
+if (!isLocalParticipantModerator(state)) {
+    return;
+}
+
+// if (newSelectedValue === 'off') {
+//     // if the change is to off, local user turned off follow me and
+//     // we want to signal this
+
+//     conference.sendCommandOnce(
+//         SPOTLIGHT_COMMAND,
+//         { attributes: { off: true } }
+//     );
+
+//     return;
+// } else if (!state['features/base/conference'].spotlightEnabled) {
+//     return;
+// }
+
+conference.sendCommand(
+    SPOTLIGHT_COMMAND,
+    { attributes: _getSpotlightState(id) }
+);
+}
+

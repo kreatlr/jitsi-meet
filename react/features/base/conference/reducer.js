@@ -17,6 +17,7 @@ import {
     LOCK_STATE_CHANGED,
     P2P_STATUS_CHANGED,
     SET_FOLLOW_ME,
+    SET_SPOTLIGHT,
     SET_PASSWORD,
     SET_PENDING_SUBJECT_CHANGE,
     SET_ROOM,
@@ -76,6 +77,9 @@ ReducerRegistry.register(
 
         case SET_FOLLOW_ME:
             return set(state, 'followMeEnabled', action.enabled);
+
+        case SET_SPOTLIGHT:
+            return set(state,'spotlightEnabled',action);
 
         case SET_LOCATION_URL:
             return set(state, 'room', undefined);

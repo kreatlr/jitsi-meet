@@ -7,6 +7,8 @@ import {
     sendAnalytics
 } from '../../analytics';
 import { grantModerator } from '../../base/participants';
+import {setFollowMe} from '../../base/conference/actions';
+import {setSpotlight} from '../../base/conference/actions';
 
 type Props = {
 
@@ -59,7 +61,7 @@ export default class AbstractSpotlightDialog
                 'participant_id': participantID
             }));
 
-        dispatch(grantModerator(participantID));
+        dispatch(setSpotlight(participantID));
 
         return true;
     }
