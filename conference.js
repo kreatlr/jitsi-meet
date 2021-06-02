@@ -90,7 +90,7 @@ import {
     participantRoleChanged,
     participantUpdated,
     updateRemoteParticipantFeatures,
-    kickParticipant
+    kickParticipant, isLocalParticipantModerator
 } from './react/features/base/participants';
 import {
     getUserSelectedCameraDeviceId,
@@ -2846,7 +2846,7 @@ export default {
         // before all operations are done.
         Promise.all([
             requestFeedbackPromise,
-            this.leaveRoomAndDisconnect()
+            this.leaveRoomAndDisconnect(isLocalParticipantModerator(APP.store.getState()))
         ]).then(values => {
             this._room = undefined;
             room = undefined;
@@ -2868,10 +2868,14 @@ export default {
      *
      * @returns {Promise}
      */
-    leaveRoomAndDisconnect() {
+    leaveRoomAndDisconnect(localParticipantModerator: boolean = false) {
         APP.store.dispatch(conferenceWillLeave(room));
 
         if (room && room.isJoined()) {
+            if (localParticipantModerator) {
+                APP.store.dispatch(maybeRedirectToWelcomePage());
+            }
+
             return room.leave().then(disconnect, disconnect);
         }
 
