@@ -445,9 +445,9 @@
     .audiodot-middle {
         opacity: 0;
         display: inline-block;
-        @include circle(5px);
+        @include circle(15px);
         background: $audioLevelShadow;
-        margin: 1px 0 1px 0;
+        margin: 2px 0 2px 0;
         transition: opacity .25s ease-in-out;
         -moz-transition: opacity .25s ease-in-out;
     }
@@ -457,8 +457,8 @@
     span.audiodot-middle::after {
         content: "";
         display: inline-block;
-        width: 5px;
-        height: 5px;
+        width: 15px;
+        height: 15px;
         border-radius: 50%;
         -webkit-filter: blur(0.5px);
         filter: blur(0.5px);

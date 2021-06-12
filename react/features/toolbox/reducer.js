@@ -30,7 +30,8 @@ declare var interfaceConfig: Object;
  *     overflowMenuVisible: boolean,
  *     timeoutID: number,
  *     timeoutMS: number,
- *     visible: boolean
+ *     visible: boolean,
+ *     hangupPopupEnabled: boolean,
  * }}
  */
 function _getInitialState() {
@@ -116,7 +117,12 @@ function _getInitialState() {
          *
          * @type {boolean}
          */
-        visible
+        visible,
+
+        /**
+         * Indicates whether the hang up pop us is activated or not
+         */
+        hangupPopupEnabled: false
     };
 }
 

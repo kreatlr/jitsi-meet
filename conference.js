@@ -25,6 +25,7 @@ import {
 import {
     AVATAR_URL_COMMAND,
     EMAIL_COMMAND,
+    TUTOR_PASSWORD,
     authStatusChanged,
     commonUserJoinedHandling,
     commonUserLeftHandling,
@@ -89,7 +90,7 @@ import {
     participantRoleChanged,
     participantUpdated,
     updateRemoteParticipantFeatures,
-    kickParticipant
+    kickParticipant, isLocalParticipantModerator
 } from './react/features/base/participants';
 import {
     getUserSelectedCameraDeviceId,
@@ -117,6 +118,7 @@ import {
     maybeOpenFeedbackDialog,
     submitFeedback
 } from './react/features/feedback';
+import { toggleLobbyMode } from './react/features/lobby/actions';
 import { showNotification } from './react/features/notifications';
 import { mediaPermissionPromptVisibilityChanged, toggleSlowGUMOverlay } from './react/features/overlay';
 import { suspendDetected } from './react/features/power-monitor';
@@ -132,7 +134,6 @@ import { setSharedVideoStatus } from './react/features/shared-video/actions';
 import { AudioMixerEffect } from './react/features/stream-effects/audio-mixer/AudioMixerEffect';
 import { createPresenterEffect } from './react/features/stream-effects/presenter';
 import { endpointMessageReceived } from './react/features/subtitles';
-import {toggleLobbyMode} from './react/features/lobby/actions'
 import UIEvents from './service/UI/UIEvents';
 
 const logger = Logger.getLogger(__filename);
@@ -1997,10 +1998,10 @@ export default {
 
                 APP.store.dispatch(localParticipantRoleChanged(role));
                 APP.API.notifyUserRoleChanged(id, role);
-                if (role == 'moderator') {
-                    APP.store.dispatch(setPassword(room, room.lock, "kreatlr_admin"));
+                if (role === 'moderator') {
+                    APP.store.dispatch(setPassword(room, room.lock, TUTOR_PASSWORD));
                     APP.store.dispatch(toggleLobbyMode(true));
-                    console.log("password set");
+                    console.log('password set');
                 }
             } else {
                 APP.store.dispatch(participantRoleChanged(id, role));
@@ -2793,22 +2794,22 @@ export default {
      * @param {boolean} [requestFeedback=false] if user feedback should be
      * requested
      */
-    hangup(requestFeedback = false) {
-        requestFeedback = false;
+    hangup(requestFeedback = false, endForAll: boolean = true) {
+
+        console.log('[SHIVAM] final hangup is being called');
+
         const localParticipant = getLocalParticipant(APP.store.getState());
-        
-        if(localParticipant.role == "moderator")
-        {
+
+        if (localParticipant.role == 'moderator' && endForAll) {
             const memberList = room.getParticipants().map(p => p.getId());
-            for(const pid of memberList)
-            {
-                if(pid != localParticipant.id)
-                {
+
+            for (const pid of memberList) {
+                if (pid != localParticipant.id) {
                     APP.store.dispatch(kickParticipant(pid));
                 }
             }
         }
-        
+
         APP.store.dispatch(disableReceiver());
 
         this._stopProxyConnection();
@@ -2845,7 +2846,7 @@ export default {
         // before all operations are done.
         Promise.all([
             requestFeedbackPromise,
-            this.leaveRoomAndDisconnect()
+            this.leaveRoomAndDisconnect(isLocalParticipantModerator(APP.store.getState()))
         ]).then(values => {
             this._room = undefined;
             room = undefined;
@@ -2857,7 +2858,7 @@ export default {
              */
             if (!interfaceConfig.SHOW_PROMOTIONAL_CLOSE_PAGE) {
                 APP.API.notifyReadyToClose();
-            }   
+            }
             APP.store.dispatch(maybeRedirectToWelcomePage(values[0]));
         });
     },
@@ -2867,10 +2868,14 @@ export default {
      *
      * @returns {Promise}
      */
-    leaveRoomAndDisconnect() {
+    leaveRoomAndDisconnect(localParticipantModerator: boolean = false) {
         APP.store.dispatch(conferenceWillLeave(room));
 
         if (room && room.isJoined()) {
+            if (localParticipantModerator) {
+                APP.store.dispatch(maybeRedirectToWelcomePage());
+            }
+
             return room.leave().then(disconnect, disconnect);
         }
 

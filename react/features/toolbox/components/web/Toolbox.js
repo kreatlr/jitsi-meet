@@ -28,7 +28,7 @@ import {
 import JitsiMeetJS from '../../../base/lib-jitsi-meet';
 import {
     getLocalParticipant,
-    getParticipants,
+    getParticipants, PARTICIPANT_ROLE,
     participantUpdated
 } from '../../../base/participants';
 import { connect } from '../../../base/redux';
@@ -77,12 +77,14 @@ import {
 } from '../../actions';
 import { getToolbarAdditionalButtons, isToolboxVisible } from '../../functions';
 import DownloadButton from '../DownloadButton';
-import HangupButton from '../HangupButton';
 import HelpButton from '../HelpButton';
 import MuteEveryoneButton from '../MuteEveryoneButton';
 import MuteEveryonesVideoButton from '../MuteEveryonesVideoButton';
 
+
 import AudioSettingsButton from './AudioSettingsButton';
+import PopUp from './HangUpDialog';
+import HangupButton from './HangupButton';
 import OverflowMenuButton from './OverflowMenuButton';
 import OverflowMenuProfileItem from './OverflowMenuProfileItem';
 import ToggleCameraButton from './ToggleCameraButton';
@@ -196,6 +198,8 @@ type Props = {
      * Flag showing whether toolbar is visible.
      */
     _visible: boolean,
+
+    _isModerator: boolean,
 
     /**
      * Array with the buttons which this Toolbox should display.
@@ -1075,15 +1079,23 @@ class Toolbox extends Component<Props> {
             _desktopSharingEnabled,
             _desktopSharingDisabledTooltipKey,
             _raisedHand,
+            _isModerator,
             _screensharing,
             t
         } = this.props;
 
         const overflowMenuAdditionalButtons = [];
         const mainMenuAdditionalButtons = [];
+
         mainMenuAdditionalButtons.push(<ToggleCameraButton
             key = 'toggle-camera'
             showLabel = { false } />);
+
+        if(_isModerator){
+            mainMenuAdditionalButtons.push(<MuteEveryoneButton
+                key = 'mute-everyone'
+                showLabel = { false } />);
+        }
         if (this._showDesktopSharingButton()) {
             buttons.has('desktop')
                 ? mainMenuAdditionalButtons.push(<ToolbarButton
@@ -1291,6 +1303,7 @@ function _mapStateToProps(state) {
         overflowMenuVisible
     } = state['features/toolbox'];
     const localParticipant = getLocalParticipant(state);
+    const isModerator = localParticipant.role === PARTICIPANT_ROLE.MODERATOR;
     const localRecordingStates = state['features/local-recording'];
     const localVideo = getLocalVideoTrack(state['features/base/tracks']);
     const { clientWidth } = state['features/base/responsive-ui'];
@@ -1326,6 +1339,7 @@ function _mapStateToProps(state) {
         _raisedHand: localParticipant.raisedHand,
         _screensharing: localVideo && localVideo.videoType === 'desktop',
         _visible: isToolboxVisible(state),
+        _isModerator: isModerator,
         _visibleButtons: getToolbarButtons(state)
     };
 }

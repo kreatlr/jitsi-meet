@@ -7,6 +7,7 @@ import {
     sendAnalytics
 } from '../../analytics';
 import { getName } from '../../app/functions';
+import { toggleLobbyMode } from '../../lobby/actions';
 import { endpointMessageReceived } from '../../subtitles';
 import { JITSI_CONNECTION_CONFERENCE_KEY } from '../connection';
 import { JitsiConferenceEvents } from '../lib-jitsi-meet';
@@ -14,7 +15,7 @@ import { MEDIA_TYPE, setAudioMuted, setVideoMuted } from '../media';
 import {
     dominantSpeakerChanged,
     getLocalParticipant,
-    getNormalizedDisplayName,
+    getNormalizedDisplayName, isLocalParticipantModerator,
     participantConnectionStatusChanged,
     participantKicked,
     participantMutedUs,
@@ -55,7 +56,7 @@ import {
 import {
     AVATAR_URL_COMMAND,
     EMAIL_COMMAND,
-    JITSI_CONFERENCE_URL_KEY
+    JITSI_CONFERENCE_URL_KEY, TUTOR_PASSWORD
 } from './constants';
 import {
     _addLocalTracksToConference,
@@ -90,7 +91,9 @@ function _addConferenceListeners(conference, dispatch, state) {
         (...args) => dispatch(conferenceFailed(conference, ...args)));
     conference.on(
         JitsiConferenceEvents.CONFERENCE_JOINED,
-        (...args) => dispatch(conferenceJoined(conference, ...args)));
+        (...args) => {
+            dispatch(conferenceJoined(conference, ...args));
+        });
     conference.on(
         JitsiConferenceEvents.CONFERENCE_LEFT,
         (...args) => {
@@ -193,7 +196,14 @@ function _addConferenceListeners(conference, dispatch, state) {
         (id, user) => commonUserLeftHandling({ dispatch }, conference, user));
     conference.on(
         JitsiConferenceEvents.USER_ROLE_CHANGED,
-        (...args) => dispatch(participantRoleChanged(...args)));
+        (id, role) => {
+            console.log('[SHIVAM] local role is ', role);
+            if (role === 'moderator') {
+                dispatch(setPassword(conference, conference.lock, TUTOR_PASSWORD));
+                dispatch(toggleLobbyMode(true));
+            }
+            dispatch(participantRoleChanged(id, role));
+        });
     conference.on(
         JitsiConferenceEvents.USER_STATUS_CHANGED,
         (...args) => dispatch(participantPresenceChanged(...args)));

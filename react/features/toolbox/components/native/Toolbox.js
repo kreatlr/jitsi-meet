@@ -7,12 +7,11 @@ import { ColorSchemeRegistry } from '../../../base/color-scheme';
 import { connect } from '../../../base/redux';
 import { StyleType } from '../../../base/styles';
 import { ChatButton } from '../../../chat';
-import { InviteButton } from '../../../invite';
 import { TileViewButton } from '../../../video-layout';
-import { isToolboxVisible, getMovableButtons } from '../../functions.native';
+import { isToolboxVisible, getMovableButtons } from '../../functions';
 import AudioMuteButton from '../AudioMuteButton';
-import HangupButton from '../HangupButton';
 import VideoMuteButton from '../VideoMuteButton';
+import HangupButton from '../native/HangupButton';
 
 import OverflowMenuButton from './OverflowMenuButton';
 import RaiseHandButton from './RaiseHandButton';
@@ -42,7 +41,9 @@ type Props = {
     /**
      * The redux {@code dispatch} function.
      */
-    dispatch: Function
+    dispatch: Function,
+
+    _hangupPopupEnabled: boolean
 };
 
 /**
@@ -66,6 +67,8 @@ function Toolbox(props: Props) {
             _styles.backgroundToggle
         ]
     };
+
+    console.log('[SHIVAM] [NATIVE] props._hangupPopupEnabled is', props._hangupPopupEnabled);
 
     return (
         <View
@@ -115,10 +118,13 @@ function Toolbox(props: Props) {
  * @returns {Props}
  */
 function _mapStateToProps(state: Object): Object {
+    console.log('[SHIVAM] [NATIVE] hangup popup enabled is', state['features/toolbox'].hangupPopupEnabled);
+
     return {
         _styles: ColorSchemeRegistry.get(state, 'Toolbox'),
         _visible: isToolboxVisible(state),
-        _width: state['features/base/responsive-ui'].clientWidth
+        _width: state['features/base/responsive-ui'].clientWidth,
+        _hangupPopupEnabled: state['features/toolbox'].hangupPopupEnabled
     };
 }
 
