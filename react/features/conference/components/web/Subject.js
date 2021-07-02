@@ -88,12 +88,14 @@ class Subject extends Component<Props> {
  * }}
  */
 function _mapStateToProps(state) {
-    const participantCount = getParticipantCount(state);
+    // const participantCount = getParticipantCount(state);
     const { hideConferenceTimer, hideConferenceSubject, hideParticipantsStats } = state['features/base/config'];
 
     return {
         _hideConferenceTimer: Boolean(hideConferenceTimer),
-        _showParticipantCount: participantCount > 2 && !hideParticipantsStats,
+
+        // _showParticipantCount: participantCount > 2 && !hideParticipantsStats,
+        _showParticipantCount: false,
         _showSubject: !hideConferenceSubject,
         _subject: getConferenceName(state),
         _visible: isToolboxVisible(state)
