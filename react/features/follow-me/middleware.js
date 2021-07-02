@@ -15,7 +15,7 @@ import {
     setFollowMeModerator,
     setFollowMeState
 } from './actions';
-import { FOLLOW_ME_COMMAND } from './constants';
+import { FOLLOW_ME_COMMAND,SPOTLIGHT_COMMAND } from './constants';
 import { isFollowMeActive } from './functions';
 import logger from './logger';
 
@@ -66,6 +66,7 @@ MiddlewareRegistry.register(store => next => action => {
                 _onFollowMeCommand(attributes, id, store);
             });
         break;
+
     }
     case PARTICIPANT_LEFT:
         if (store.getState()['features/follow-me'].moderator === action.participant.id) {
@@ -77,6 +78,20 @@ MiddlewareRegistry.register(store => next => action => {
     return next(action);
 });
 
+MiddlewareRegistry.register(store => next => action => {
+    switch (action.type) {
+        case CONFERENCE_WILL_JOIN: {
+            const { conference } = action;
+
+            conference.addCommandListener(
+                SPOTLIGHT_COMMAND, ({ attributes }, id) => {
+                    _onSpotlightCommand(attributes, id, store);
+                });
+            break;
+        }
+    }
+    return next(action);
+});
 /**
  * Notifies this instance about a "Follow Me" command received by the Jitsi
  * conference.
@@ -151,6 +166,71 @@ function _onFollowMeCommand(attributes = {}, id, store) {
             documentManager.toggleEtherpad();
         }
     }
+
+    const pinnedParticipant = getPinnedParticipant(state);
+    const idOfParticipantToPin = attributes.nextOnStage;
+
+    if (typeof idOfParticipantToPin !== 'undefined'
+            && (!pinnedParticipant || idOfParticipantToPin !== pinnedParticipant.id)
+            && oldState.nextOnStage !== attributes.nextOnStage) {
+        _pinVideoThumbnailById(store, idOfParticipantToPin);
+    } else if (typeof idOfParticipantToPin === 'undefined' && pinnedParticipant) {
+        store.dispatch(pinParticipant(null));
+    }
+}
+
+function _onSpotlightCommand(attributes = {}, id, store) {
+    console.log("On Spotlight Command: to pin "+ attributes.nextOnStage + " received from " +id);
+    const state = store.getState();
+
+    // We require to know who issued the command because (1) only a
+    // moderator is allowed to send commands and (2) a command MUST be
+    // issued by a defined commander.
+    if (typeof id === 'undefined') {
+        return;
+    }
+
+    const participantSendingCommand = getParticipantById(state, id);
+
+    // The Command(s) API will send us our own commands and we don't want
+    // to act upon them.
+    // if (participantSendingCommand.local) {
+    //     return;
+    // }
+
+    if (participantSendingCommand.role !== 'moderator') {
+        logger.warn('Received follow-me command not from moderator');
+
+        return;
+    }
+
+    // if (!isFollowMeActive(state)) {
+        // store.dispatch(setFollowMeModerator(id));
+    // }
+
+    // just a command that follow me was turned off
+    // if (attributes.off) {
+    //     store.dispatch(setFollowMeModerator());
+
+    //     return;
+    // }
+
+    const oldState = {};
+
+    // store.dispatch(setFollowMeState(attributes));
+
+    // XMPP will translate all booleans to strings, so explicitly check against
+    // the string form of the boolean {@code true}.
+    // if (oldState.filmstripVisible !== attributes.filmstripVisible) {
+    //     store.dispatch(setFilmstripVisible(attributes.filmstripVisible === 'true'));
+    // }
+
+    // if (oldState.tileViewEnabled !== attributes.tileViewEnabled) {
+    //     store.dispatch(setTileView(attributes.tileViewEnabled === 'true'));
+    // }
+
+    // For now gate etherpad checks behind a web-app check to be extra safe
+    // against calling a web-app global.
 
     const pinnedParticipant = getPinnedParticipant(state);
     const idOfParticipantToPin = attributes.nextOnStage;

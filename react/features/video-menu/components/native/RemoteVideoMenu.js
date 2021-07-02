@@ -15,6 +15,7 @@ import { hideRemoteVideoMenu } from '../../actions.native';
 
 import ConnectionStatusButton from './ConnectionStatusButton';
 import GrantModeratorButton from './GrantModeratorButton';
+import SpotlightButton from './SpotlightButton';
 import KickButton from './KickButton';
 import MuteButton from './MuteButton';
 import MuteEveryoneElseButton from './MuteEveryoneElseButton';
@@ -103,6 +104,7 @@ class RemoteVideoMenu extends PureComponent<Props> {
                 renderHeader = { this._renderMenuHeader }>
                 { !_disableRemoteMute && <MuteButton { ...buttonProps } /> }
                 { !_disableKick && <KickButton { ...buttonProps } /> }
+                <SpotlightButton { ...buttonProps } />
                 <GrantModeratorButton { ...buttonProps } />
                 <PinButton { ...buttonProps } />
                 <PrivateMessageButton { ...buttonProps } />

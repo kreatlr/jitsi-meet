@@ -4,3 +4,5 @@
  * (instance) between participants.
  */
 export const FOLLOW_ME_COMMAND = 'follow-me';
+
+export const SPOTLIGHT_COMMAND = 'spotlight';

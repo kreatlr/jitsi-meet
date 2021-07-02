@@ -161,6 +161,8 @@ export const SEND_TONES = 'SEND_TONES';
  */
 export const SET_FOLLOW_ME = 'SET_FOLLOW_ME';
 
+export const SET_SPOTLIGHT = 'SET_SPOTLIGHT';
+
 /**
  * The type of (redux) action which sets the password to join or lock a specific
  * {@code JitsiConference}.
