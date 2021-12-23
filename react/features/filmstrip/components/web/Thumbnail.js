@@ -994,8 +994,8 @@ function _mapStateToProps(state, ownProps): Object {
     case LAYOUTS.VERTICAL_FILMSTRIP_VIEW:
         size = {
             _heightToWidthPercent: isLocal
-                ? 100 / interfaceConfig.LOCAL_THUMBNAIL_RATIO
-                : 100 / interfaceConfig.REMOTE_THUMBNAIL_RATIO
+                ? 100 / (4/3)
+                : 100 / (4/3)
         };
         break;
     case LAYOUTS.TILE_VIEW: {

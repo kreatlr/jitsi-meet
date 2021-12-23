@@ -11,7 +11,10 @@ import {
 import { getToolbarButtons } from '../../../base/config';
 import { translate } from '../../../base/i18n';
 import { Icon, IconMenuDown, IconMenuUp } from '../../../base/icons';
-import { getLocalParticipant } from '../../../base/participants';
+import {
+    getLocalParticipant,
+    PARTICIPANT_ROLE
+} from '../../../base/participants';
 import { connect } from '../../../base/redux';
 import { isButtonEnabled } from '../../../toolbox/functions.web';
 import { LAYOUTS, getCurrentLayout } from '../../../video-layout';
@@ -147,6 +150,8 @@ class Filmstrip extends Component <Props> {
      */
     render() {
         const filmstripStyle = { };
+        const localfilmstripStyle = { };
+        const remotefilmstripStyle = { };
         const filmstripRemoteVideosContainerStyle = {};
         let remoteVideoContainerClassName = 'remote-videos-container';
         const { _currentLayout, _participants } = this.props;
@@ -158,7 +163,9 @@ class Filmstrip extends Component <Props> {
         case LAYOUTS.VERTICAL_FILMSTRIP_VIEW:
             // Adding 18px for the 2px margins, 2px borders on the left and right and 5px padding on the left and right.
             // Also adding 7px for the scrollbar.
-            filmstripStyle.maxWidth = (interfaceConfig.FILM_STRIP_MAX_HEIGHT || 120) + 25;
+            filmstripStyle.maxWidth = (interfaceConfig.FILM_STRIP_MAX_HEIGHT || 120) + 100;
+            localfilmstripStyle.maxWidth = (interfaceConfig.FILM_STRIP_MAX_HEIGHT || 120) + 100;
+            remotefilmstripStyle.maxWidth = (interfaceConfig.FILM_STRIP_MAX_HEIGHT || 120) + 25;
             break;
         case LAYOUTS.TILE_VIEW: {
             // The size of the side margins for each tile as set in CSS.
@@ -195,7 +202,8 @@ class Filmstrip extends Component <Props> {
                     id = 'remoteVideos'>
                     <div
                         className = 'filmstrip__videos'
-                        id = 'filmstripLocalVideo'>
+                        id = 'filmstripLocalVideo'
+                        style = { localfilmstripStyle }>
                         <div id = 'filmstripLocalVideoThumbnail'>
                             {
                                 !tileViewActive && <Thumbnail
@@ -203,10 +211,21 @@ class Filmstrip extends Component <Props> {
                                     participantID = { localParticipant.id } />
                             }
                         </div>
+                        <div id = 'filmstripLocalVideoThumbnail'>
+                            {
+                                remoteParticipants.map(
+                                    p => (
+                                    p.role === PARTICIPANT_ROLE.MODERATOR && <Thumbnail
+                                            key = 'local'
+                                            participantID = { p.id } />
+                                    ))
+                            }
+                        </div>
                     </div>
                     <div
                         className = { remoteVideosWrapperClassName }
-                        id = 'filmstripRemoteVideos'>
+                        id = 'filmstripRemoteVideos'
+                        style = { remotefilmstripStyle }>
                         {/*
                           * XXX This extra video container is needed for
                           * scrolling thumbnails in Firefox; otherwise, the flex

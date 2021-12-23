@@ -85,6 +85,7 @@ import MuteEveryonesVideoButton from '../MuteEveryonesVideoButton';
 import AudioSettingsButton from './AudioSettingsButton';
 import PopUp from './HangUpDialog';
 import HangupButton from './HangupButton';
+import ShowImageButton from './ShowImageButton';
 import OverflowMenuButton from './OverflowMenuButton';
 import OverflowMenuProfileItem from './OverflowMenuProfileItem';
 import ToggleCameraButton from './ToggleCameraButton';
@@ -1259,6 +1260,8 @@ class Toolbox extends Component<Props> {
                                 { this._renderOverflowMenuContent(overflowMenuAdditionalButtons) }
                             </ul>
                         </OverflowMenuButton>}
+                        <ShowImageButton
+                            visible = { true } />
                         <HangupButton
                             customClass = 'hangup-button'
                             visible = { this._shouldShowButton('hangup') } />
