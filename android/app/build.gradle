@@ -153,7 +153,8 @@ gradle.projectsEvaluated {
                 workingDir androidRoot
 
                 // Run the packager
-                commandLine("scripts/run-packager.sh")
+//                commandLine(". C:\\Users\\rj\\Documents\\shiris\\JitsiCode\\jitsi-meet\\android\\scripts\\run-packager.sh")
+                commandLine "cmd","/c",'.\\scripts\\run-packager.sh'
             }
 
             // Set up dev mode

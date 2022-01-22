@@ -12,7 +12,7 @@ import { isToolboxVisible, getMovableButtons } from '../../functions';
 import AudioMuteButton from '../AudioMuteButton';
 import VideoMuteButton from '../VideoMuteButton';
 import HangupButton from '../native/HangupButton';
-
+import ShowImageButton from '../native/ShowImageButton';
 import OverflowMenuButton from './OverflowMenuButton';
 import RaiseHandButton from './RaiseHandButton';
 import ToggleCameraButton from './ToggleCameraButton';
@@ -101,6 +101,9 @@ function Toolbox(props: Props) {
                 <OverflowMenuButton
                     styles = { buttonStylesBorderless }
                     toggledStyles = { toggledButtonStyles } />
+                <ShowImageButton
+                  styles = { buttonStylesBorderless }
+                  visible = { true } />
                 <HangupButton
                     styles = { hangupButtonStyles } />
             </SafeAreaView>

@@ -58,7 +58,7 @@ public class MainActivity extends JitsiMeetActivity {
     /**
      * ServerURL configuration key for restriction configuration using {@link android.content.RestrictionsManager}
      */
-    public static final String RESTRICTION_SERVER_URL = "SERVER_URL";
+    public static final String RESTRICTION_SERVER_URL = "https://classes.kreatlr.com";
 
     /**
      * Broadcast receiver for restrictions handling
