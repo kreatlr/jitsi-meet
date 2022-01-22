@@ -83,10 +83,19 @@ export default class PreMeetingScreen extends PureComponent<Props> {
         const showSharingButton = allowUrlSharing();
 
         return (
-            <div
+            <div style={{ backgroundImage: "url(images/background.jpg)", background: `linear-gradient(to bottom, rgba(255, 255, 255, 0.85), rgba(0, 0, 0, 0.4)),url(images/background1250.jpeg)` }}
                 className = 'premeeting-screen'
                 id = 'lobby-screen'>
                 <ConnectionStatus />
+                <div
+                    className = 'content'>
+                    <img
+                      height= "300"
+                      width = "300"
+                      src = 'images/newLogo.png'
+                      alt="new"
+                      />
+                </div>
                 <Preview
                     videoMuted = { videoMuted }
                     videoTrack = { videoTrack } />
@@ -117,7 +126,7 @@ export default class PreMeetingScreen extends PureComponent<Props> {
                             </div>
                         </div>
                     </div>
-                    { this.props.skipPrejoinButton }
+
                     { this.props.footer }
                 </div>
             </div>

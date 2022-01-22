@@ -29,6 +29,7 @@ class LobbyScreen extends AbstractLobbyScreen {
             <CustomDialog
                 onCancel = { this._onCancel }
                 style = { styles.contentWrapper }>
+
                 <Text style = { styles.dialogTitle }>
                     { t(this._getScreenTitleKey()) }
                 </Text>
