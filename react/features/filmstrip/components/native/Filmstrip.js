@@ -2,7 +2,10 @@
 
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView } from 'react-native';
-
+import { View } from 'react-native';
+import {
+    PARTICIPANT_ROLE
+} from '../../../base/participants';
 import { Platform } from '../../../base/react';
 import { connect } from '../../../base/redux';
 import { ASPECT_RATIO_NARROW } from '../../../base/responsive-ui/constants';
@@ -101,29 +104,43 @@ class Filmstrip extends Component<Props> {
                     horizontal = { isNarrowAspectRatio }
                     showsHorizontalScrollIndicator = { false }
                     showsVerticalScrollIndicator = { false }
-                    style = { styles.scrollView } >
+                    contentContainerStyle = { styles.scrollView } >
                     {
-                        !this._separateLocalThumbnail && !isNarrowAspectRatio
+                        this._sort(_participants, isNarrowAspectRatio)
+                            .map(p => (
+                            p.role === PARTICIPANT_ROLE.MODERATOR &&
+                                <Thumbnail
+                                    styleOverrides = {{height: 100,width: 100,maxHeight: 100,maxWidth: 100}}
+                                    key = { p.id }
+                                    participant = { p } />
+                                    ))
+
+                    }
+                    {
+                        !this._separateLocalThumbnail
                             && <LocalThumbnail />
                     }
+
                     {
 
                         this._sort(_participants, isNarrowAspectRatio)
                             .map(p => (
+                            p.role != PARTICIPANT_ROLE.MODERATOR &&
                                 <Thumbnail
                                     key = { p.id }
-                                    participant = { p } />))
+                                    participant = { p } />
 
+                                    ))
                     }
-                    {
-                        !this._separateLocalThumbnail && isNarrowAspectRatio
-                            && <LocalThumbnail />
-                    }
+
+
+
                 </ScrollView>
                 {
                     this._separateLocalThumbnail && isNarrowAspectRatio
                         && <LocalThumbnail />
                 }
+
             </SafeAreaView>
         );
     }

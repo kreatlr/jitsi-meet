@@ -51,6 +51,9 @@ class LobbyScreen extends AbstractLobbyScreen {
 
     _renderContent: () => React$Element<*>;
 
+//<span className = 'joining-message'>
+//                    { this.props.t('lobby.joiningMessage') }
+//                </span>
     /**
      * Renders the joining (waiting) fragment of the screen.
      *

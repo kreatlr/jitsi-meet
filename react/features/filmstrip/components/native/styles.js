@@ -8,7 +8,7 @@ import { SMALL_THUMBNAIL_SIZE } from '../../constants';
  * Size for the Avatar.
  */
 export const AVATAR_SIZE = 50;
-
+export const MODERATOR_THUMBNAIL_SIZE = 140;
 /**
  * The styles of the feature filmstrip.
  */
@@ -73,7 +73,8 @@ export default {
      * The style of the scrollview containing the remote thumbnails.
      */
     scrollView: {
-        flexGrow: 0
+        flexGrow: 0,
+        alignItems: 'flex-end'
     },
 
     /**
