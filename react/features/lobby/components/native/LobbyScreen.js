@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
 
 import { Avatar } from '../../../base/avatar';
 import { CustomDialog } from '../../../base/dialog';
@@ -29,17 +29,22 @@ class LobbyScreen extends AbstractLobbyScreen {
             <CustomDialog
                 onCancel = { this._onCancel }
                 style = { styles.contentWrapper }>
-
+                <Image
+                    style = {styles.logoImg}
+                    source={require('../../../../../images/newLogo2.png')}
+                  />
                 <Text style = { styles.dialogTitle }>
-                    { t(this._getScreenTitleKey()) }
+                    {"India's Best Drawing Classes" }
                 </Text>
-                <Text style = { styles.secondaryText }>
-                    { _meetingName }
-                </Text>
+
                 { this._renderContent() }
             </CustomDialog>
         );
     }
+
+//    <Text style = { styles.secondaryText }>
+//                        { _meetingName }
+//                    </Text>
 
     _getScreenTitleKey: () => string;
 
@@ -214,7 +219,7 @@ class LobbyScreen extends AbstractLobbyScreen {
                         styles.primaryButton
                     ] }>
                     <Text style = { styles.primaryButtonText }>
-                        { t('lobby.knockButton') }
+                        { "Join Class" }
                     </Text>
                 </TouchableOpacity> }
                 <TouchableOpacity

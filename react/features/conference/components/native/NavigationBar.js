@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Image } from 'react-native';
 
 import { getConferenceName } from '../../../base/conference';
 import { getFeatureFlag, CONFERENCE_TIMER_ENABLED, MEETING_NAME_ENABLED } from '../../../base/flags';
@@ -55,19 +55,24 @@ const NavigationBar = (props: Props) => {
             style = { styles.navBarWrapper }>
             <PictureInPictureButton
                 styles = { styles.navBarButton } />
+
             <View
                 pointerEvents = 'box-none'
                 style = { styles.roomNameContainer }>
                 <View
                     pointerEvents = 'box-none'
                     style = { styles.roomNameWrapper }>
+                    <Image
+                        style = {styles.logoImg}
+                        source={require('../../../../../images/newLogo2Inv.png')}
+                      />
                     {
-                        props._meetingNameEnabled
+                        false && props._meetingNameEnabled
                         && <View style = { styles.roomNameView }>
                             <Text
                                 numberOfLines = { 1 }
                                 style = { styles.roomName }>
-                                { props._meetingName }
+                                { "My Meeting" }
                             </Text>
                         </View>
                     }

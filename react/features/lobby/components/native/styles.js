@@ -5,6 +5,11 @@ import { ColorPalette } from '../../../base/styles';
 const SECONDARY_COLOR = '#B8C7E0';
 
 export default {
+
+    logoImg: {
+        width: 150,
+        height: 80
+    },
     button: {
         alignItems: 'center',
         borderRadius: 4,
@@ -86,7 +91,7 @@ export default {
 
     primaryButton: {
         alignSelf: 'stretch',
-        backgroundColor: 'rgb(3, 118, 218)'
+        backgroundColor: '#1c2025'
     },
 
     primaryButtonText: {

@@ -21,6 +21,13 @@ export default {
     displayNameContainer: {
         margin: 10
     },
+     logoImg: {
+        top: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 150,
+        height: 80
+    },
 
     /**
      * View that contains the indicators.
